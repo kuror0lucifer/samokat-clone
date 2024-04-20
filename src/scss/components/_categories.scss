@@ -1,0 +1,25 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  overflow: auto;
+
+  padding: 16px;
+
+  background-color: white;
+
+  border-radius: 20px;
+
+  &__item-container {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+
+    gap: 8px;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

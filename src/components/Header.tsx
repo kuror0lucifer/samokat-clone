@@ -1,14 +1,11 @@
 import React from 'react';
 import Search from './Search';
+import logo from '../assets/header__logo.svg';
 
 const Header: React.FC = () => {
   return (
     <header className='header'>
-      <img
-        src='https://samokat.ru/images/logo.svg'
-        alt='header_logo'
-        className='header__logo'
-      />
+      {<img src={logo} alt='header_logo' className='header__logo' />}
       <Search />
       <button className='header__button-login'>
         <svg

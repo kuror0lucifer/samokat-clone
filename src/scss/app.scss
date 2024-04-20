@@ -6,3 +6,11 @@
 body {
   background-color: $gray;
 }
+
+.section {
+  position: relative;
+  top: 95px;
+
+  display: flex;
+  justify-content: center;
+}
