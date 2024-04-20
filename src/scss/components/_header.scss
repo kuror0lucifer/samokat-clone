@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  width: calc(100% - 10px - 10px);
+  height: 20vh;
+  margin: 0 auto;
+  padding: 16px 10px;
+  gap: 10px;
+
+  background-color: #ffffff;
+
+  border-radius: 0 0 32px 32px;
+
+  &__logo {
+    padding-left: 12px;
+    padding-right: 61px;
+  }
+
+  &__button-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-width: 325px;
+    height: 100%;
+    padding: 12px 20px;
+
+    border-radius: 35px;
+    border: 0;
+
+    cursor: pointer;
+
+    span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}

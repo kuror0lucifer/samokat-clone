@@ -1,0 +1,56 @@
+@import '../../scss/_variables.scss';
+
+.root {
+  position: relative;
+
+  width: 100%;
+  height: 48px;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+
+  text-align: left;
+  background-color: $gray;
+
+  border: 0;
+  border-radius: 35px;
+
+  padding: 0 44px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+
+  caret-color: $coral;
+
+  &::placeholder {
+    font-size: 14px;
+    font-weight: 600;
+    color: #a1a1a1;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  color: $dark-gray;
+
+  left: 20px;
+  top: 16px;
+
+  width: 15px;
+  height: 15px;
+}
+
+.clearIcon {
+  position: absolute;
+
+  right: 20px;
+  top: 16px;
+
+  width: 15px;
+  height: 15px;
+
+  cursor: pointer;
+}
