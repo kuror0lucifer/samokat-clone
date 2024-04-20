@@ -1,0 +1,25 @@
+.workingHours {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  height: fit-content;
+
+  padding: 16px 4px;
+
+  background-color: white;
+  border-radius: 20px;
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__text {
+    font-weight: 600;
+    font-size: 14px;
+    color: $dark-gray;
+  }
+}
