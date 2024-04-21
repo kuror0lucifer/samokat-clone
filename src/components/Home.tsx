@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   return (
     <section className='section'>
       <Categories />
-      {offHours.includes(currentHours.getHours()) ? '' : <WorkingHours />}
+      {offHours.includes(currentHours.getHours()) ? <WorkingHours /> : ''}
     </section>
   );
 };
