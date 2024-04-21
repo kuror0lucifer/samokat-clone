@@ -74,15 +74,19 @@ const categoriesItems: string[][] = [
 
 const Categories = () => {
   return (
-    <aside className='categories'>
-      {categoriesItems.map((el, index) => {
-        return (
-          <div className='categories__item-container' key={index}>
-            <img src={el[0]} alt='category img' />
-            <span>{el[1]}</span>
-          </div>
-        );
-      })}
+    <aside className='aside-left'>
+      <div className='sidebar'>
+        <div className='catalog-tree'>
+          {categoriesItems.map((el, index) => {
+            return (
+              <div className='catalog-tree__item' key={index}>
+                <img src={el[0]} alt='category img' />
+                <span>{el[1]}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </aside>
   );
 };
