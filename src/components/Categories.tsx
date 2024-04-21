@@ -5,6 +5,7 @@ const categoriesItems: string[][] = [
     'https://cm.samokat.ru/processed/category/dc3ac8bf-0029-41be-857e-13421f7fa753.jpg',
     'На разные случаи',
   ],
+
   [
     'https://cm.samokat.ru/processed/category/c7f2b6e7-d1e7-4e84-8ecf-6e21506dba03.jpg',
     'От Самоката',
