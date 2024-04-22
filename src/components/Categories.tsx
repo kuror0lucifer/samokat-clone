@@ -80,7 +80,10 @@ const Categories = () => {
           {categoriesItems.map((el, index) => {
             return (
               <div className='catalog-tree__item' key={index}>
-                <img src={el[0]} alt='category img' />
+                <div
+                  className='catalog-tree__item-img'
+                  style={{ backgroundImage: `url(${el[0]})` }}
+                ></div>
                 <span>{el[1]}</span>
               </div>
             );
