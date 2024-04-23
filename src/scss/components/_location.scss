@@ -1,16 +1,30 @@
 .location {
-  width: 44%;
-  max-height: 85%;
+  height: 80%;
 
-  border-radius: 20px;
+  border-radius: 40px;
   background-color: white;
 
-  padding: 16px;
-
   .sidebar {
-    .addressConfirm {
+    position: fixed;
+    right: 10px;
+    width: 26%;
+    height: calc(100% - 95px - 20px);
+
+    background: url('../../assets/map.png');
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 40px;
+
+    .address-confirm {
       width: 100%;
       height: auto;
+
+      padding: 16px 16px 8px 16px;
+
+      background-color: white;
+      border-radius: 20px;
+
       &__title {
         padding-bottom: 5px;
 
@@ -63,6 +77,17 @@
             background-color: #f91e4e;
           }
         }
+      }
+    }
+
+    .map__container {
+      width: 100%;
+      height: auto;
+
+      .map {
+        width: 100%;
+        height: 50vh;
+        border-radius: 0 0 20px 20px;
       }
     }
   }
