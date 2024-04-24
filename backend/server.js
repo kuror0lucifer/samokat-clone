@@ -1,114 +1,136 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
-import { validationResult } from 'express-validator';
+// import express from 'express';
+// import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
+// import mongoose from 'mongoose';
+// import { validationResult } from 'express-validator';
+// import cors from 'cors';
 
-import { registerValidation } from './validation/auth.js';
+// import categoriesSchema from './models/Categories.js';
 
-import UserModel from './models/User.js';
+// import { registerValidation } from './validation/auth.js';
 
-mongoose
-  .connect(
-    'mongodb+srv://admin:Fedffedf27@cluster0.nl0usoo.mongodb.net/samokat?retryWrites=true&w=majority&appName=cluster0'
-  )
-  .then(() => console.log('DB OK'))
-  .catch(err => console.log('DB error', err));
+// import UserModel from './models/User.js';
 
-const app = express();
+// const app = express();
 
-app.use(express.json());
+// mongoose
+//   .connect(
+//     'mongodb+srv://admin:Fedffedf27@cluster0.nl0usoo.mongodb.net/samokat?retryWrites=true&w=majority',
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     }
+//   )
+//   .then(() => console.log('MongoDB connected'))
+//   .catch(err => console.error('MongoDB connection error:', err));
 
-app.post('/auth/login', async (req, res) => {
-  try {
-    const user = await UserModel.findOne({ email: req.body.email });
+// // Определение схемы для категорий
+// const Category = mongoose.model('Category', categoriesSchema);
 
-    if (!user) {
-      return res.status(404).json({
-        message: 'Пользователь не найден',
-      });
-    }
+// app.use(express.json());
+// app.use(cors());
 
-    const isValidPass = await bcrypt.compare(
-      req.body.password,
-      user._doc.passwordHash
-    );
+// // Маршрут для получения категорий
+// app.get('/api/categories', async (req, res) => {
+//   try {
+//     const categories = await Category.find();
+//     res.json(categories);
+//   } catch (error) {
+//     console.error('Error fetching categories:', error);
+//     res.status(500).json({ message: 'Internal server error' });
+//   }
+// });
 
-    if (!isValidPass) {
-      return res.status(400).json({
-        message: 'Неверный логин или пароль',
-      });
-    }
+// app.post('/auth/login', async (req, res) => {
+//   try {
+//     const user = await UserModel.findOne({ email: req.body.email });
 
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      'secret123',
-      {
-        expiresIn: '30d',
-      }
-    );
+//     if (!user) {
+//       return res.status(404).json({
+//         message: 'Пользователь не найден',
+//       });
+//     }
 
-    const { passwordHash, ...userData } = user._doc;
+//     const isValidPass = await bcrypt.compare(
+//       req.body.password,
+//       user._doc.passwordHash
+//     );
 
-    res.json({
-      ...userData,
-      token,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: 'Не удалось авторизоваться',
-    });
-  }
-});
+//     if (!isValidPass) {
+//       return res.status(400).json({
+//         message: 'Неверный логин или пароль',
+//       });
+//     }
 
-app.post('/auth/register', registerValidation, async (req, res) => {
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array());
-    }
+//     const token = jwt.sign(
+//       {
+//         _id: user._id,
+//       },
+//       'secret123',
+//       {
+//         expiresIn: '30d',
+//       }
+//     );
 
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+//     const { passwordHash, ...userData } = user._doc;
 
-    const doc = new UserModel({
-      email: req.body.email,
-      fullName: req.body.fullName,
-      passwordHash: hash,
-    });
+//     res.json({
+//       ...userData,
+//       token,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       message: 'Не удалось авторизоваться',
+//     });
+//   }
+// });
 
-    const user = await doc.save();
+// app.post('/auth/register', registerValidation, async (req, res) => {
+//   try {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json(errors.array());
+//     }
 
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      'secret123',
-      {
-        expiresIn: '30d',
-      }
-    );
+//     const password = req.body.password;
+//     const salt = await bcrypt.genSalt(10);
+//     const hash = await bcrypt.hash(password, salt);
 
-    const { passwordHash, ...userData } = user._doc;
+//     const doc = new UserModel({
+//       email: req.body.email,
+//       fullName: req.body.fullName,
+//       passwordHash: hash,
+//     });
 
-    res.json({
-      ...userData,
-      token,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: 'Не удалось зарегистрироваться',
-    });
-  }
-});
+//     const user = await doc.save();
 
-app.listen(4455, err => {
-  if (err) {
-    return console.log(err);
-  }
+//     const token = jwt.sign(
+//       {
+//         _id: user._id,
+//       },
+//       'secret123',
+//       {
+//         expiresIn: '30d',
+//       }
+//     );
 
-  console.log('Server OK');
-});
+//     const { passwordHash, ...userData } = user._doc;
+
+//     res.json({
+//       ...userData,
+//       token,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       message: 'Не удалось зарегистрироваться',
+//     });
+//   }
+// });
+
+// app.listen(3001, err => {
+//   if (err) {
+//     return console.log(err);
+//   }
+
+//   console.log('Server OK');
+// });
