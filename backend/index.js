@@ -4,7 +4,7 @@ import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-import CategoryModel from './models/Categories';
+import CategoryModel from './models/Categories.js';
 
 import { validationResult } from 'express-validator';
 import { registerValidation } from './validation/auth.js';
