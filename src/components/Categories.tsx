@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 type CategoriesItem = {
@@ -10,12 +10,12 @@ type CategoriesItem = {
 const Categories = () => {
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchCategories = async () => {
       try {
         await axios
           .get('http://localhost:4000/getCategories')
-          .then(response => setCategories(response.data))
+          .then(res => setCategories(res.data))
           .catch(err => console.log(err));
       } catch (err) {
         console.error('Ошибка загрузки категорий товаров: ', err);
@@ -28,7 +28,7 @@ const Categories = () => {
     <aside className='aside-left'>
       <div className='sidebar'>
         <div className='catalog-tree'>
-          {categories.map((category, index) => {
+          {categories.map(category => {
             return (
               <div className='catalog-tree__item' key={category._id}>
                 <div
