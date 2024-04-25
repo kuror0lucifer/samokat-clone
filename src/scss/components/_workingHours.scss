@@ -5,12 +5,13 @@
   gap: 8px;
 
   width: 100%;
-  height: fit-content;
+  height: auto;
 
-  padding: 16px 4px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
 
   background-color: white;
-  border-radius: 20px;
+  border-radius: 32px;
 
   &__icon {
     width: 24px;
