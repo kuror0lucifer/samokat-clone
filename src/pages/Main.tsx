@@ -31,19 +31,19 @@ const Main: React.FC = () => {
       <div className='main__wrapper'></div>
 
       <div className='main__container'>
-        <div>
+        <div className='text__container'>
           <span className='main__container-text'>Доставка</span>&nbsp;
           <span className='main__container-text'>от 15 минут</span>
         </div>
         <div className='card'>
           {mainCategories.map(categories => {
             return (
-              <a href='##'>
-                <div className='card-block' key={categories._id}>
+              <a href='##' key={categories._id}>
+                <div className='card-block'>
                   <span className='card-block-text'>{categories.title}</span>
                   <div className='card__container'>
                     <div className='card__container-img'>
-                      <img src={categories.imageUrl} alt='card img' />
+                      <img src={categories.imageUrl} alt={categories.title} />
                     </div>
                   </div>
                 </div>

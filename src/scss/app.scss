@@ -19,11 +19,8 @@ body {
 
   &__container {
     display: flex;
-    // justify-content: center;
-
     flex-direction: column;
-    width: 54%;
 
-    position: relative;
+    width: 54%;
   }
 }

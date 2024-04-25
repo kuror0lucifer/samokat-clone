@@ -8,6 +8,7 @@ const currentHours: Date = new Date();
 const offHours: number[] = [23, 0, 1, 2, 3, 4, 5, 6, 7];
 
 const Home: React.FC = () => {
+  console.log(currentHours.getHours());
   return (
     <section className='section'>
       <Categories />
