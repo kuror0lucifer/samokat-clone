@@ -1,8 +1,11 @@
 .location {
-  height: 80%;
+  height: 20vh;
 
   border-radius: 40px;
   background-color: white;
+
+  position: relative;
+  right: calc(-100px + 10px);
 
   .sidebar {
     position: fixed;
