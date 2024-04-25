@@ -7,11 +7,11 @@ const Location: React.FC = () => {
         <div className='address-confirm'>
           <h3 className='address-confirm__title'>Ваш город Москва?</h3>
           <p className='address-confirm__text'>
-            Цены и акции могут отличаться в зависимости от расположения
+            Товары и акции зависят от адреса
           </p>
           <div className='buttons'>
-            <button className='confirm-button'>Верно</button>
-            <button className='confirm-button'>Выбрать другой</button>
+            <button className='confirm-button'>Да, верно</button>
+            <button className='confirm-button'>Нет, другой</button>
           </div>
         </div>
         <div className='map__container'>

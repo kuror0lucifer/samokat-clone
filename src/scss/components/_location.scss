@@ -17,28 +17,31 @@
     border-radius: 40px;
 
     .address-confirm {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
       width: 100%;
       height: auto;
 
-      padding: 16px 16px 8px 16px;
+      padding: 20px;
 
       background-color: white;
-      border-radius: 20px;
+      border-radius: 24px;
 
       &__title {
-        padding-bottom: 5px;
-
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 700;
-        line-height: 28px;
+        line-height: 24px;
+        color: $dark-gray;
       }
 
       &__text {
         color: rgb(166, 166, 166);
 
         font-weight: 600;
-
-        padding-top: 10px;
+        font-size: 16px;
+        line-height: 19px;
       }
 
       .buttons {
@@ -46,9 +49,7 @@
         display: flex;
         align-items: center;
         justify-items: start;
-        gap: 30px;
-
-        padding: 20px 5px;
+        gap: 12px;
 
         button {
           width: fit-content;
@@ -60,16 +61,19 @@
 
           padding: 0 16px;
 
-          color: white;
+          font-size: 14px;
           font-weight: 600;
+          line-height: 18px;
+          color: white;
 
           cursor: pointer;
 
           &:last-child {
-            background-color: $dark-gray;
+            background-color: $gray;
+            color: $dark-gray;
 
             &:hover {
-              background-color: #2a2a2a;
+              background-color: #d3d3d3;
             }
           }
 

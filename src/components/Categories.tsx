@@ -35,7 +35,9 @@ const Categories = () => {
                   className='catalog-tree__item-img'
                   style={{ backgroundImage: `url(${category.imageUrl})` }}
                 ></div>
-                <span>{category.title}</span>
+                <span className='catalog-tree__item-text'>
+                  {category.title}
+                </span>
               </div>
             );
           })}
