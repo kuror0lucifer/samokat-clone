@@ -5,10 +5,12 @@ type CategoriesItem = {
   _id: string;
   imageUrl: string;
   title: string;
+  subcategories: string[];
 };
 
 const Categories = () => {
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
+  const [showSubcategories, setShowSubcategories] = React.useState({});
 
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -24,12 +26,19 @@ const Categories = () => {
     fetchCategories();
   }, []);
 
+  const onClickCategory = categoryId => {
+    setShowSubcategories(prevState => ({
+      ...prevState,
+      [categoryId]: !prevState[categoryId],
+    }));
+  };
+
   return (
     <aside className='aside-left'>
       <div className='sidebar'>
         <div className='catalog-tree'>
-          {categories.map(category => {
-            return (
+          {categories.map(category => (
+            <>
               <div className='catalog-tree__item' key={category._id}>
                 <div
                   className='catalog-tree__item-img'
@@ -38,9 +47,24 @@ const Categories = () => {
                 <span className='catalog-tree__item-text'>
                   {category.title}
                 </span>
+                <div
+                  className='clickable-overlay'
+                  onClick={() => onClickCategory(category._id)}
+                ></div>
               </div>
-            );
-          })}
+              <div>
+                {showSubcategories[category._id] && (
+                  <div className='catalog-tree__subcategories'>
+                    {category.subcategories.map((subcategory, index) => (
+                      <a href='##' key={index}>
+                        <span>{subcategory}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </>
+          ))}
         </div>
       </div>
     </aside>
