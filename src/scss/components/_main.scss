@@ -1,22 +1,27 @@
 .main {
   width: 100%;
+  max-width: 53%;
   height: 100%;
-  padding: 0 16px 16px;
   border-radius: 32px;
   background-color: white;
-  position: relative;
+  position: fixed;
 
   overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
-  & &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 
   &__wrapper {
     position: fixed;
+
     height: 32px;
-    width: calc(53% - 32px);
-    border-radius: 15px 32px 0 0;
+    width: 53%;
+    border-radius: 32px 32px 0 0;
+    // border: 1px solid black;
+
     background-color: white;
     z-index: 1000;
   }
@@ -25,7 +30,10 @@
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 72px);
+    padding: 0 16px 16px;
+
     padding-top: 30px;
+
     overflow: auto;
     flex: 1;
 
