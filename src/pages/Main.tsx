@@ -42,11 +42,12 @@ const Main: React.FC = () => {
             <span className='main__container-text'>от 15 минут</span>
           </div>
 
-          <div className='card'>
-            {mainCategories.map(categories => {
-              return (
-                <>
-                  {categories.subcategories.map((subcategory, index) => {
+          {mainCategories.map(categories => {
+            return (
+              <>
+                <span className='card__title'>{categories.title}</span>
+                <div className='card'>
+                  {categories.subcategories.map(subcategory => {
                     return (
                       <a href='##' key={subcategory._id}>
                         <div className='card-block'>
@@ -65,10 +66,10 @@ const Main: React.FC = () => {
                       </a>
                     );
                   })}
-                </>
-              );
-            })}
-          </div>
+                </div>
+              </>
+            );
+          })}
         </div>
       </main>
     </div>
