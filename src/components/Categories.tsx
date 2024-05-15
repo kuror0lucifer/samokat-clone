@@ -5,7 +5,10 @@ type CategoriesItem = {
   _id: string;
   imageUrl: string;
   title: string;
-  subcategories: string[];
+  subcategories: {
+    subcategoryImg: string;
+    title: string;
+  }[];
 };
 
 const Categories = () => {
@@ -60,7 +63,7 @@ const Categories = () => {
                   >
                     {category.subcategories.map((subcategory, index) => (
                       <a href='##' key={`${category._id}-${index}`}>
-                        <span>{subcategory}</span>
+                        <span>{subcategory.title}</span>
                       </a>
                     ))}
                   </div>

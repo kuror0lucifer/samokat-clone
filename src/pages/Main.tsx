@@ -5,6 +5,10 @@ type MainCategoriesItem = {
   _id: string;
   imageUrl: string;
   title: string;
+  subcategories: {
+    subcategoryImg: string;
+    title: string;
+  }[];
 };
 
 const Main: React.FC = () => {
@@ -16,7 +20,7 @@ const Main: React.FC = () => {
     const fetchMainCategories = async () => {
       try {
         await axios
-          .get('http://localhost:4000/getMainCategories')
+          .get('http://localhost:4000/getCategories')
           .then(res => setMainCategories(res.data))
           .catch(err => console.log(err));
       } catch (err) {
@@ -36,19 +40,34 @@ const Main: React.FC = () => {
             <span className='main__container-text'>Доставка</span>&nbsp;
             <span className='main__container-text'>от 15 минут</span>
           </div>
+
           <div className='card'>
             {mainCategories.map(categories => {
               return (
-                <a href='##' key={categories._id}>
-                  <div className='card-block'>
-                    <span className='card-block-text'>{categories.title}</span>
-                    <div className='card__container'>
-                      <div className='card__container-img'>
-                        <img src={categories.imageUrl} alt={categories.title} />
-                      </div>
-                    </div>
-                  </div>
-                </a>
+                <>
+                  {categories.subcategories.map((subcategory, index) => {
+                    return (
+                      <a href='##' key={categories._id}>
+                        <div
+                          className='card-block'
+                          key={`${categories._id}-${index}`}
+                        >
+                          <span className='card-block-text'>
+                            {subcategory.title}
+                          </span>
+                          <div className='card__container'>
+                            <div className='card__container-img'>
+                              <img
+                                src={subcategory.subcategoryImg}
+                                alt={subcategory.title}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </>
               );
             })}
           </div>

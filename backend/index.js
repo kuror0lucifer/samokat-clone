@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import CategoryModel from './models/Categories.js';
-import MainCategoryModel from './models/MainCategories.js';
 
 import { validationResult } from 'express-validator';
 import { registerValidation } from './validation/auth.js';
@@ -21,12 +20,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/samokat');
 app.get('/getCategories', (req, res) => {
   CategoryModel.find()
     .then(categories => res.json(categories))
-    .catch(err => res.json(err));
-});
-
-app.get('/getMainCategories', (req, res) => {
-  MainCategoryModel.find()
-    .then(mainCategories => res.json(mainCategories))
     .catch(err => res.json(err));
 });
 
