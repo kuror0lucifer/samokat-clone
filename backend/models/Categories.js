@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const SubcategorySchema = new mongoose.Schema({
   subcategoryImg: String,
   title: String,
+  _id: String,
 });
 
 const CategoriesSchema = new mongoose.Schema({
