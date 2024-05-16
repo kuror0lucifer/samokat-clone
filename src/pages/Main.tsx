@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
 
 type MainCategoriesItem = {
   _id: string;
@@ -32,9 +33,11 @@ const Main: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <main className='main'>
-        <div className='main__wrapper'></div>
+        <div className='main__wrapper'>
+          {/* <div className='main__wrapper-border'></div> */}
+        </div>
 
         <div className='main__container'>
           <div className='text__container'>
@@ -73,7 +76,8 @@ const Main: React.FC = () => {
           })}
         </div>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 };
 
