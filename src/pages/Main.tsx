@@ -47,7 +47,7 @@ const Main: React.FC = () => {
 
           {mainCategories.map(categories => {
             return (
-              <>
+              <div className='div'>
                 <span className='card__title'>{categories.title}</span>
                 <div className='card'>
                   {categories.subcategories.map(subcategory => {
@@ -71,7 +71,7 @@ const Main: React.FC = () => {
                     );
                   })}
                 </div>
-              </>
+              </div>
             );
           })}
         </div>

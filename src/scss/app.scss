@@ -5,13 +5,14 @@
 
 body {
   background-color: $gray;
-  overflow: hidden;
 }
 
 .section {
   position: relative;
 
   display: flex;
+
+  height: 100vh;
 
   gap: 10px;
 
