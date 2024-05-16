@@ -59,6 +59,7 @@ const Main: React.FC = () => {
                               <img
                                 src={subcategory.subcategoryImg}
                                 alt={subcategory.title}
+                                loading='lazy'
                               />
                             </div>
                           </div>
