@@ -21,10 +21,8 @@ const Main: React.FC = () => {
   React.useEffect(() => {
     const fetchMainCategories = async () => {
       try {
-        await axios
-          .get('http://localhost:4000/getCategories')
-          .then(res => setMainCategories(res.data))
-          .catch(err => console.log(err));
+        const response = await axios.get('http://localhost:4000/getCategories');
+        setMainCategories(response.data);
       } catch (err) {
         console.error('Ошибка загрузки категорий товаров: ', err);
       }
@@ -45,35 +43,36 @@ const Main: React.FC = () => {
             <span className='main__container-text'>от 15 минут</span>
           </div>
 
-          {mainCategories.map(categories => {
-            return (
-              <div className='div'>
-                <span className='card__title'>{categories.title}</span>
-                <div className='card'>
-                  {categories.subcategories.map(subcategory => {
-                    return (
-                      <a href='##' key={subcategory._id}>
-                        <div className='card-block'>
-                          <span className='card-block-text'>
-                            {subcategory.title}
-                          </span>
-                          <div className='card__container'>
-                            <div className='card__container-img'>
-                              <img
-                                src={subcategory.subcategoryImg}
-                                alt={subcategory.title}
-                                loading='lazy'
-                              />
-                            </div>
-                          </div>
+          {mainCategories.map((category, index) => (
+            <div className='div' key={category._id}>
+              {index > 0 ? (
+                <span className='card__title'>{category.title}</span>
+              ) : (
+                ''
+              )}
+
+              <div className='card'>
+                {category.subcategories.map(subcategory => (
+                  <a href='##' key={subcategory._id}>
+                    <div className='card-block'>
+                      <span className='card-block-text'>
+                        {subcategory.title}
+                      </span>
+                      <div className='card__container'>
+                        <div className='card__container-img'>
+                          <img
+                            src={subcategory.subcategoryImg}
+                            alt={subcategory.title}
+                            loading='lazy'
+                          />
                         </div>
-                      </a>
-                    );
-                  })}
-                </div>
+                      </div>
+                    </div>
+                  </a>
+                ))}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </main>
       <Footer />

@@ -7,7 +7,7 @@
   padding: 32px 16px 0;
 
   width: 100%;
-  height: fit-content;
+  height: 90px;
 
   &__stores {
     display: grid;
@@ -41,11 +41,6 @@
     grid-column-gap: 12px;
     grid-row-gap: 12px;
     justify-content: flex-end;
-
-    &-icons {
-      &-block {
-      }
-    }
   }
 
   &__info {
@@ -65,6 +60,14 @@
       height: fit-content;
     }
   }
+  .footer-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: -0.05px;
+    color: $dark-gray;
+    cursor: pointer;
+  }
   &-copyright {
     width: 100%;
     grid-area: 3 / 1 / 4 / 3;
@@ -72,22 +75,6 @@
     font-weight: 600;
     line-height: 15px;
     letter-spacing: 0.02px;
-    color: rgb(166, 166, 166);
-  }
-}
-.footer-text {
-  width: fit-content;
-  height: fit-content;
-
-  // word-break: normal;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 19px;
-  letter-spacing: -0.05px;
-  color: $dark-gray;
-  cursor: pointer;
-  &-color {
-    width: 630px;
     color: rgb(166, 166, 166);
   }
 }

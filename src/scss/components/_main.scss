@@ -40,6 +40,18 @@
 
     padding-top: 30px;
 
+    .div {
+      .card__title {
+        display: block;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.6px;
+        color: $dark-gray;
+        margin-bottom: 20px;
+      }
+    }
+
     .text__container {
       padding-left: 16px;
       margin-bottom: 32px;
@@ -57,18 +69,6 @@
       }
     }
 
-    .card__title {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 30px;
-      letter-spacing: -0.6px;
-      color: $dark-gray;
-      margin-bottom: 20px;
-
-      &:first-of-type {
-        display: none;
-      }
-    }
     .card {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
