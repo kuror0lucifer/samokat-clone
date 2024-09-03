@@ -1,9 +1,22 @@
 import mongoose from 'mongoose';
 
+const ItemsSchema = new mongoose.Schema({
+  productName: String,
+  productPrice: String,
+  productWeight: String,
+  productImg: String,
+  });
+
+const ProductsSchema = new mongoose.Schema({
+category: String,
+items: [ItemsSchema]
+});
+
 const SubcategorySchema = new mongoose.Schema({
   subcategoryImg: String,
   title: String,
   _id: String,
+  products: [ProductsSchema]
 });
 
 const CategoriesSchema = new mongoose.Schema({

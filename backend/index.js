@@ -15,7 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/samokat');
+mongoose.connect('mongodb+srv://admin:Fedffedf27@cluster0.nl0usoo.mongodb.net/samokat?retryWrites=true&w=majority')
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.log('Failed to connect to MongoDB', err));
 
 app.get('/getCategories', (req, res) => {
   CategoryModel.find()
