@@ -9,7 +9,7 @@ type MainCategoriesItem = {
   subcategories: {
     subcategoryImg: string;
     title: string;
-    _id: string;
+    subcategoryId: string;
   }[];
 };
 
@@ -53,7 +53,7 @@ const Main: React.FC = () => {
 
               <div className='card'>
                 {category.subcategories.map(subcategory => (
-                  <a href='##' key={subcategory._id}>
+                  <a href='##' key={subcategory.subcategoryId}>
                     <div className='card-block'>
                       <span className='card-block-text'>
                         {subcategory.title}

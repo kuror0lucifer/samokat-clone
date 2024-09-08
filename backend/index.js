@@ -1,37 +1,43 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-import CategoryModel from './models/Categories.js';
+import CategoryModel from "./models/Categories.js";
 
-import { validationResult } from 'express-validator';
-import { registerValidation } from './validation/auth.js';
+import { validationResult } from "express-validator";
+import { registerValidation } from "./validation/auth.js";
 
-import UserModel from './models/User.js';
+import UserModel from "./models/User.js";
 
+import dotenv from 'dotenv'
+  
+dotenv.config()
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://admin:Fedffedf27@cluster0.nl0usoo.mongodb.net/samokat?retryWrites=true&w=majority')
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.log('Failed to connect to MongoDB', err));
+mongoose
+  .connect(
+    process.env.DB_CONN
+  )
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("Failed to connect to MongoDB", err));
 
-app.get('/getCategories', (req, res) => {
+app.get("/getCategories", (req, res) => {
   CategoryModel.find()
-    .then(categories => res.json(categories))
-    .catch(err => res.json(err));
+    .then((categories) => res.json(categories))
+    .catch((err) => res.json(err));
 });
 
-app.post('/auth/login', async (req, res) => {
+app.post("/auth/login", async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
 
     if (!user) {
       return res.status(404).json({
-        message: 'Пользователь не найден',
+        message: "Пользователь не найден",
       });
     }
 
@@ -42,7 +48,7 @@ app.post('/auth/login', async (req, res) => {
 
     if (!isValidPass) {
       return res.status(400).json({
-        message: 'Неверный логин или пароль',
+        message: "Неверный логин или пароль",
       });
     }
 
@@ -50,9 +56,9 @@ app.post('/auth/login', async (req, res) => {
       {
         _id: user._id,
       },
-      'secret123',
+      "secret123",
       {
-        expiresIn: '30d',
+        expiresIn: "30d",
       }
     );
 
@@ -64,12 +70,12 @@ app.post('/auth/login', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: 'Не удалось авторизоваться',
+      message: "Не удалось авторизоваться",
     });
   }
 });
 
-app.post('/auth/register', registerValidation, async (req, res) => {
+app.post("/auth/register", registerValidation, async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -92,9 +98,9 @@ app.post('/auth/register', registerValidation, async (req, res) => {
       {
         _id: user._id,
       },
-      'secret123',
+      "secret123",
       {
-        expiresIn: '30d',
+        expiresIn: "30d",
       }
     );
 
@@ -106,13 +112,13 @@ app.post('/auth/register', registerValidation, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: 'Не удалось зарегистрироваться',
+      message: "Не удалось зарегистрироваться",
     });
   }
 });
 
-const PORT = 4000;
+const port = process.env.PORT;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on ${port}`);
 });
