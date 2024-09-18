@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
+import { Products } from "./Products";
 
 type MainCategoriesItem = {
   _id: string;
@@ -26,13 +28,13 @@ type MainCategoriesItem = {
 
 type MainProps = {
   setId: (id: string) => void;
+  id: string;
 };
 
-const Main: React.FC<MainProps> = ({ setId }) => {
+const Main: React.FC<MainProps> = ({ id, setId }) => {
   const [mainCategories, setMainCategories] = React.useState<
     MainCategoriesItem[]
   >([]);
-  // const [id, setId] = React.useState<string>("");
 
   React.useEffect(() => {
     const fetchMainCategories = async () => {
@@ -46,22 +48,6 @@ const Main: React.FC<MainProps> = ({ setId }) => {
     fetchMainCategories();
   }, []);
 
-  // React.useEffect(() => {
-  //   if (id) {
-  //     const fetchProducts = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `http://localhost:4000/getProducts/${id}`
-  //         );
-  //         setGetProducts(response.data);
-  //       } catch (err) {
-  //         console.error("Ошибка получения продуктов", err);
-  //       }
-  //     };
-  //     fetchProducts();
-  //   }
-  // }, [id]);
-
   const onClickId: Function = (id: string) => {
     setId(id);
     console.log(id);
@@ -70,9 +56,7 @@ const Main: React.FC<MainProps> = ({ setId }) => {
   return (
     <>
       <main className="main">
-        <div className="main__wrapper">
-          {/* <div className='main__wrapper-border'></div> */}
-        </div>
+        <div className="main__wrapper"></div>
 
         <div className="main__container">
           <div className="text__container">
@@ -84,14 +68,12 @@ const Main: React.FC<MainProps> = ({ setId }) => {
             <div className="div" key={category._id}>
               {index > 0 ? (
                 <span className="card__title">{category.title}</span>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               <div className="card">
                 {category.subcategories.map((subcategory) => (
-                  <a
-                    href="##"
+                  <Link
+                    to="/products"
                     key={subcategory.subcategoryId}
                     onClick={() => {
                       onClickId(subcategory.subcategoryId);
@@ -111,7 +93,7 @@ const Main: React.FC<MainProps> = ({ setId }) => {
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

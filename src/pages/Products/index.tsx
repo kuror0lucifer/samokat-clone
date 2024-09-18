@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { FaArrowLeft } from "react-icons/fa6";
 import styles from "./Products.module.scss";
+import { Link } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 type ProductItem = {
   productName: string;
@@ -20,10 +22,11 @@ type Category = {
 type ProductsResponse = Category[];
 
 type productsProps = {
+  setId: (id: string) => void;
   id: string;
 };
 
-export const Products: React.FC<productsProps> = ({ id }) => {
+export const Products: React.FC<productsProps> = ({ id, setId }) => {
   const [obtainedProducts, setObtainedProducts] =
     React.useState<ProductsResponse | null>(null);
 
@@ -43,9 +46,8 @@ export const Products: React.FC<productsProps> = ({ id }) => {
     }
   }, [id]);
 
-  const handleGoBack = () => {
-    window.history.back();
-    console.log(obtainedProducts);
+  const handleClick = () => {
+    setId(null);
   };
 
   return (
@@ -53,9 +55,12 @@ export const Products: React.FC<productsProps> = ({ id }) => {
       <main className="main">
         <div className="main__container">
           <div className="text__container">
-            <button className={styles.return} onClick={handleGoBack}>
-              <FaArrowLeft className={styles.return__icon} />
-            </button>
+            <Link to="/" onClick={() => handleClick()}>
+              <button className={styles.return}>
+                <FaArrowLeft className={styles.return__icon} />
+              </button>
+            </Link>
+
             {obtainedProducts && (
               <h1 className={styles.title}>{obtainedProducts[0]?.title}</h1>
             )}
@@ -114,6 +119,7 @@ export const Products: React.FC<productsProps> = ({ id }) => {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 };
