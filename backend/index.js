@@ -5,23 +5,22 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 import CategoryModel from "./models/Categories.js";
+import ProductsModel from "./models/Products.js";
 
 import { validationResult } from "express-validator";
 import { registerValidation } from "./validation/auth.js";
 
 import UserModel from "./models/User.js";
 
-import dotenv from 'dotenv'
-  
-dotenv.config()
+import dotenv from "dotenv";
+
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(
-    process.env.DB_CONN
-  )
+  .connect(process.env.DB_CONN)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Failed to connect to MongoDB", err));
 
@@ -29,6 +28,35 @@ app.get("/getCategories", (req, res) => {
   CategoryModel.find()
     .then((categories) => res.json(categories))
     .catch((err) => res.json(err));
+});
+
+app.get(`/getProducts/:subcategoryId`, (req, res) => {
+  const subcategoryId = req.params.subcategoryId;
+
+  ProductsModel.aggregate([
+    {
+      $match: {
+        subcategoryId: subcategoryId,
+      },
+    },
+    {
+      $unwind: "$products",
+    },
+    {
+      $project: {
+        _id: 0,
+        title: 1,
+        category: "$products.category",
+        items: "$products.items",
+      },
+    },
+  ])
+    .then((products) => res.json(products))
+    .catch((err) =>
+      res
+        .status(500)
+        .json({ message: "Ошибка при получении продуктов", error: err })
+    );
 });
 
 app.post("/auth/login", async (req, res) => {
