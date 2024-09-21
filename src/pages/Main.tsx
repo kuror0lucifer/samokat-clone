@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { Products } from "./Products";
 
 type MainCategoriesItem = {
   _id: string;
@@ -39,8 +38,9 @@ const Main: React.FC<MainProps> = ({ id, setId }) => {
   React.useEffect(() => {
     const fetchMainCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/getCategories");
-        setMainCategories(response.data);
+        await axios
+          .get("http://localhost:4000/getCategories")
+          .then((res) => setMainCategories(res.data));
       } catch (err) {
         console.error("Ошибка загрузки категорий товаров: ", err);
       }
@@ -48,9 +48,8 @@ const Main: React.FC<MainProps> = ({ id, setId }) => {
     fetchMainCategories();
   }, []);
 
-  const onClickId: Function = (id: string) => {
+  const onClickId = (id: string): void => {
     setId(id);
-    console.log(id);
   };
 
   return (

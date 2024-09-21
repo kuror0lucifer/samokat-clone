@@ -21,7 +21,7 @@ const Categories = () => {
         await axios
           .get("http://localhost:4000/getCategories")
           .then((res) => setCategories(res.data))
-          .catch((err) => console.log(err));
+          .catch((err) => console.error(err));
       } catch (err) {
         console.error("Ошибка загрузки категорий товаров: ", err);
       }

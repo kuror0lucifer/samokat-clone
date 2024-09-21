@@ -1,18 +1,18 @@
-import React from 'react';
-import { FaSearch } from 'react-icons/fa';
-import { MdClear } from 'react-icons/md';
+import React from "react";
+import { FaSearch } from "react-icons/fa";
+import { MdClear } from "react-icons/md";
 
-import styles from './Search.module.scss';
+import styles from "./Search.module.scss";
 
 const Search: React.FC = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
   const onClickClear = () => {
-    setValue('');
+    setValue("");
   };
 
   return (
@@ -20,7 +20,7 @@ const Search: React.FC = () => {
       <FaSearch className={styles.searchIcon} />
       <input
         className={styles.input}
-        placeholder='Искать в Самокате'
+        placeholder="Искать в Самокате"
         onChange={onChangeInput}
         value={value}
       />
@@ -29,4 +29,4 @@ const Search: React.FC = () => {
   );
 };
 
-export default Search;
+export default React.memo(Search);
