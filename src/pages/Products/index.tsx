@@ -12,6 +12,9 @@ export type ProductItem = {
   productWeight: string;
   productImg: string;
   productId: string;
+  productDescription: string;
+  productNutritions: string[][];
+  productAttributes: string[];
 };
 
 type Category = {
@@ -31,7 +34,6 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
   const [obtainedProducts, setObtainedProducts] =
     React.useState<ProductsResponse | null>(null);
 
-  const [productId, setproductId] = React.useState<string | null>(null);
   const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [selectedProduct, setSelectedProduct] =
     React.useState<ProductItem | null>(null);
