@@ -4,8 +4,9 @@ import { FaArrowLeft } from "react-icons/fa6";
 import styles from "./Products.module.scss";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
+import { ProductPopup } from "../../components/ProductPopup";
 
-type ProductItem = {
+export type ProductItem = {
   productName: string;
   productPrice: number;
   productWeight: string;
@@ -30,6 +31,11 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
   const [obtainedProducts, setObtainedProducts] =
     React.useState<ProductsResponse | null>(null);
 
+  const [productId, setproductId] = React.useState<string | null>(null);
+  const [isPopupVisible, setIsPopupVisible] = React.useState(false);
+  const [selectedProduct, setSelectedProduct] =
+    React.useState<ProductItem | null>(null);
+
   React.useEffect(() => {
     if (id) {
       const fetchProducts = async () => {
@@ -48,6 +54,11 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
 
   const handleClick = () => {
     setId(null);
+  };
+
+  const handleProductClick = (product: ProductItem) => {
+    setSelectedProduct(product);
+    setIsPopupVisible(true);
   };
 
   return (
@@ -79,7 +90,10 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
                 <a href="##">
                   <div className={styles.cards}>
                     {category.items.map((item) => (
-                      <div className={styles.productCard__root}>
+                      <div
+                        className={styles.productCard__root}
+                        onClick={() => handleProductClick(item)}
+                      >
                         <div className={styles.productImg__root}>
                           <img
                             src={item.productImg}
@@ -128,6 +142,11 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
           </div>
         </div>
       </main>
+      <ProductPopup
+        productInfo={selectedProduct}
+        isPopupVisible={isPopupVisible}
+        setIsPopupVisible={setIsPopupVisible}
+      />
       <Footer />
     </>
   );

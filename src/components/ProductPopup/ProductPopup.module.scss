@@ -1,0 +1,58 @@
+@import "../../scss/variables";
+
+.drawer__container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 978px;
+  height: calc(100vh - 64px);
+  background-color: #fff;
+  top: 0px;
+  right: 0px;
+  margin: 32px;
+
+  box-shadow: 0 0 10px 5px #0000001a;
+  border-radius: 32px;
+
+  z-index: 100000;
+
+  transform: translateZ(0) !important;
+
+  transition-duration: 300ms;
+
+  .navigation__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
+
+    width: 36px;
+    height: 36px;
+    padding: 0 4px;
+
+    border-radius: 32px;
+    border: 0;
+
+    cursor: pointer;
+
+    span {
+      height: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  height: auto;
+  .title {
+    width: 100%;
+    height: auto;
+  }
+}

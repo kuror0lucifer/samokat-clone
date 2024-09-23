@@ -4,6 +4,7 @@ import WorkingHours from "./WorkingHours";
 import Main from "../pages/Main";
 import Location from "./Location";
 import { Products } from "../pages/Products";
+import { ProductPopup } from "./ProductPopup";
 
 const currentHours: Date = new Date();
 const offHours: number[] = [23, 0, 1, 2, 3, 4, 5, 6, 7];
@@ -23,6 +24,7 @@ const Home: React.FC<HomeProps> = ({ id, setId }) => {
           <Main id={id} setId={setId} />
         )}
       </div>
+
       <Location />
     </section>
   );
