@@ -43,21 +43,15 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
             <div className={styles.header}>
               <div className={styles.img__root}></div>
             </div>
-            {productInfo ? (
-              <div className={styles.content}>
-                <div className={styles.title}>
-                  <h1>{productInfo?.productName}</h1>
-                  <span></span>
-                  <ul></ul>
-                </div>
-                <img
-                  src={productInfo.productImg}
-                  alt={productInfo.productName}
-                />
+
+            <div className={styles.content}>
+              <div className={styles.title}>
+                <h1>{productInfo?.productName}</h1>
+                <span></span>
+                <ul></ul>
               </div>
-            ) : (
-              <div>Загрузка...</div>
-            )}
+              <img src={productInfo.productImg} alt={productInfo.productName} />
+            </div>
           </div>
         </div>
       </nav>

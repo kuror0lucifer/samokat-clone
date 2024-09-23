@@ -13,7 +13,6 @@ import { registerValidation } from "./validation/auth.js";
 import UserModel from "./models/User.js";
 
 import dotenv from "dotenv";
-import ProductModel from "./models/Product.js";
 
 dotenv.config();
 const app = express();
