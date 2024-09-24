@@ -1,46 +1,66 @@
 @import "../../scss/variables";
 
-.drawer__container {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  width: 978px;
-  height: calc(100vh - 64px);
-  background-color: #fff;
-  top: 0px;
-  right: 0px;
-  margin: 32px;
+.drawer {
+  .overlay {
+    z-index: 1000;
 
-  box-shadow: 0 0 10px 5px #0000001a;
-  border-radius: 32px;
-
-  z-index: 100000;
-
-  transform: translateZ(0) !important;
-
-  transition-duration: 300ms;
-}
-
-.root {
-  height: 100%;
-  overflow-y: auto;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000c;
   }
-  .container {
-    display: flex;
-    height: 100%;
-    padding: 0 24px;
 
-    .content {
+  .drawer__container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 978px;
+    height: calc(100vh - 64px);
+    background-color: #fff;
+    top: 0px;
+    right: 0px;
+    margin: 32px;
+
+    box-shadow: 0 0 10px 5px #0000001a;
+    border-radius: 32px;
+
+    z-index: 100000;
+
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+
+    &.visible {
+      transform: translateX(0);
+    }
+
+    &.hidden {
+      transform: translateX(100%);
+    }
+  }
+
+  .root {
+    height: 100%;
+    overflow-y: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .container {
       display: flex;
-      flex-direction: column;
-      padding: 24px 0 0 24px;
-      width: 100%;
-      height: auto;
+      height: 100%;
+      padding: 0 24px;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        padding: 24px 0 0 24px;
+        width: 100%;
+        height: auto;
+      }
     }
   }
 }
