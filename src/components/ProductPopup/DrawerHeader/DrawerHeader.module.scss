@@ -1,0 +1,32 @@
+@import "../../../scss/variables";
+
+.navigation__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+
+  width: 36px;
+  height: 36px;
+  padding: 0 4px;
+
+  border-radius: 32px;
+  border: 0;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-line;
+  }
+
+  span {
+    height: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

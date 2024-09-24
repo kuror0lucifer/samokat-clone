@@ -1,0 +1,16 @@
+@import "../../../scss/variables";
+.title {
+  width: 100%;
+  height: auto;
+  padding: 6px 45px 20px 0;
+  .text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.4px;
+
+    & + span {
+      color: $gray-light;
+    }
+  }
+}

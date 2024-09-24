@@ -1,0 +1,13 @@
+@import "../../../scss/variables";
+
+.description {
+  padding: 16px 0;
+  border-top: 1px solid $gray;
+  span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    color: rgb(89, 89, 89);
+  }
+}
