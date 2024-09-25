@@ -31,3 +31,5 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
     </div>
   );
 };
+
+export default React.memo(DrawerHeader);

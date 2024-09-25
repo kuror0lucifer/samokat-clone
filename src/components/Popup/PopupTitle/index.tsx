@@ -16,3 +16,5 @@ export const PopupTitle: React.FC<PopupTitleProps> = ({ productInfo }) => {
     </div>
   );
 };
+
+export default React.memo(PopupTitle);

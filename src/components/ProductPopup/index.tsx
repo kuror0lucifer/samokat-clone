@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./ProductPopup.module.scss";
 import { ProductItem } from "../../pages/Products";
-import { DrawerHeader } from "./DrawerHeader";
-import { ImgHeader } from "./ImgHeader";
-import { PopupTitle } from "./PopupTitle";
-import { ShareButton } from "./ShareButton";
-import { Description } from "./Description";
-import { Nutritions } from "./Nutritions";
-import { Attributes } from "./Attributes";
-import { PriceButton } from "./PriceButton";
+import { DrawerHeader } from "../Popup/DrawerHeader";
+import { ImgHeader } from "../Popup/ImgHeader";
+import { PopupTitle } from "../Popup/PopupTitle";
+import { ShareButton } from "../Popup/ShareButton";
+import { Description } from "../Popup/Description";
+import { Nutritions } from "../Popup/Nutritions";
+import { Attributes } from "../Popup/Attributes";
+import { PriceButton } from "../Popup/PriceButton";
+import { Overlay } from "../Popup/Overlay";
+import { Drawer } from "../Popup/Drawer";
+import { DrawerContainer } from "../Popup/DrawerContainer";
 
 type ProductPopupProps = {
   productInfo: ProductItem | null;
@@ -21,14 +24,13 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
   isPopupVisible,
   setIsPopupVisible,
 }) => {
-  const [isMounted, setIsMounted] = React.useState(false); // Контроль DOM
-  const [isAnimating, setIsAnimating] = React.useState(false); // Контроль анимации
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [isAnimating, setIsAnimating] = React.useState(false);
 
-  // Управляем состоянием анимации и монтированием
   React.useEffect(() => {
     if (isPopupVisible) {
-      setIsMounted(true); // Вставляем в DOM
-      setTimeout(() => setIsAnimating(true), 10); // Небольшая задержка перед началом анимации открытия
+      setIsMounted(true);
+      setTimeout(() => setIsAnimating(true), 10);
     } else if (isMounted) {
       setIsAnimating(false);
       setTimeout(() => setIsMounted(false), 500);
@@ -39,32 +41,27 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
 
   return (
     isPopupVisible && (
-      <div className={styles.drawer}>
-        <div
-          className={styles.overlay}
-          onClick={() => setIsPopupVisible(false)}
-        ></div>
-        <nav
-          className={`${styles.drawer__container} ${
-            isAnimating ? styles.visible : styles.hidden // Добавляем класс hidden для закрытия
-          }`}
-        >
-          <DrawerHeader setIsPopupVisible={setIsPopupVisible} />
-          <div className={styles.root}>
-            <div className={styles.container}>
-              <ImgHeader productInfo={productInfo} />
-              <div className={styles.content}>
-                <PopupTitle productInfo={productInfo} />
-                <ShareButton />
-                <Description productInfo={productInfo} />
-                <Nutritions productInfo={productInfo} />
-                <Attributes productInfo={productInfo} />
-                <PriceButton productInfo={productInfo} />
+      <>
+        <Drawer>
+          <Overlay setIsPopupVisible={setIsPopupVisible} />
+          <DrawerContainer isAnimating={isAnimating}>
+            <DrawerHeader setIsPopupVisible={setIsPopupVisible} />
+            <div className={styles.root}>
+              <div className={styles.container}>
+                <ImgHeader productInfo={productInfo} />
+                <div className={styles.content}>
+                  <PopupTitle productInfo={productInfo} />
+                  <ShareButton />
+                  <Description productInfo={productInfo} />
+                  <Nutritions productInfo={productInfo} />
+                  <Attributes productInfo={productInfo} />
+                  <PriceButton productInfo={productInfo} />
+                </div>
               </div>
             </div>
-          </div>
-        </nav>
-      </div>
+          </DrawerContainer>
+        </Drawer>
+      </>
     )
   );
 };

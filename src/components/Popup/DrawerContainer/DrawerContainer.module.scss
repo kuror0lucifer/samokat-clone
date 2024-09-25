@@ -1,0 +1,27 @@
+.drawer__container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 978px;
+  height: calc(100vh - 64px);
+  background-color: #fff;
+  top: 0px;
+  right: 0px;
+  margin: 32px;
+
+  box-shadow: 0 0 10px 5px #0000001a;
+  border-radius: 32px;
+
+  z-index: 100000;
+
+  transform: translateX(100%);
+  transition: transform 0.5s ease-in-out;
+
+  &.visible {
+    transform: translateX(0);
+  }
+
+  &.hidden {
+    transform: translateX(100%);
+  }
+}
