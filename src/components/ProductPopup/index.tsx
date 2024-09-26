@@ -11,7 +11,6 @@ import { Attributes } from "../Popup/Attributes";
 import { PriceButton } from "../Popup/PriceButton";
 import { Overlay } from "../Popup/Overlay";
 import { Drawer } from "../Popup/Drawer";
-import { DrawerContainer } from "../Popup/DrawerContainer";
 
 type ProductPopupProps = {
   productInfo: ProductItem | null;
@@ -24,28 +23,14 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
   isPopupVisible,
   setIsPopupVisible,
 }) => {
-  const [isMounted, setIsMounted] = React.useState(false);
-  const [isAnimating, setIsAnimating] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isPopupVisible) {
-      setIsMounted(true);
-      setTimeout(() => setIsAnimating(true), 10);
-    } else if (isMounted) {
-      setIsAnimating(false);
-      setTimeout(() => setIsMounted(false), 500);
-    }
-  }, [isPopupVisible, isMounted]);
-
-  if (!isMounted) return null;
+  if (!isPopupVisible) return null;
 
   return (
     isPopupVisible && (
       <>
         <Drawer>
-          <Overlay setIsPopupVisible={setIsPopupVisible} />
-          <DrawerContainer isAnimating={isAnimating}>
-            <DrawerHeader setIsPopupVisible={setIsPopupVisible} />
+          <Overlay>
+            <DrawerHeader />
             <div className={styles.root}>
               <div className={styles.container}>
                 <ImgHeader productInfo={productInfo} />
@@ -59,7 +44,7 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
                 </div>
               </div>
             </div>
-          </DrawerContainer>
+          </Overlay>
         </Drawer>
       </>
     )

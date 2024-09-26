@@ -1,0 +1,32 @@
+@import "../../../scss/variables";
+
+.root {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 16px;
+  justify-content: center;
+
+  max-width: 295px;
+  height: 100%;
+  margin: 0 auto;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .buttonM {
+      background-color: $gray;
+
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 19px;
+      letter-spacing: -0.05px;
+      color: $dark-gray;
+
+      &:hover {
+        background-color: $gray-line;
+      }
+    }
+  }
+}

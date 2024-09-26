@@ -1,18 +1,24 @@
 import React from "react";
 import styles from "./DrawerHeader.module.scss";
+import { hidePopup } from "../../../redux/popup/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
-type DrawerHeaderProps = {
-  setIsPopupVisible: (visible: boolean) => void;
-};
+type DrawerHeaderProps = {};
 
-export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
-  setIsPopupVisible,
-}) => {
+export const DrawerHeader: React.FC<DrawerHeaderProps> = () => {
+  const dispatch = useDispatch();
+  const isPopupVisible = useSelector(
+    (state: RootState) => state.popup.isPopupVisible
+  );
+
   return (
     <div className={styles.drawer__header}>
       <button
         className={styles.navigation__button}
-        onClick={() => setIsPopupVisible(false)}
+        onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+          dispatch(hidePopup())
+        }
       >
         <span>
           <svg

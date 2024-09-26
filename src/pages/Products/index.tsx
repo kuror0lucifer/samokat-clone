@@ -5,6 +5,11 @@ import styles from "./Products.module.scss";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { ProductPopup } from "../../components/ProductPopup";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { showPopup, hidePopup } from "../../redux/popup/slice";
+import { RegistrationPopup } from "../../components/RegistrationPopup";
+import { ButtonS } from "../../components/Buttons/ButtonS";
 
 export type ProductItem = {
   productName: string;
@@ -34,9 +39,13 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
   const [obtainedProducts, setObtainedProducts] =
     React.useState<ProductsResponse | null>(null);
 
-  const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [selectedProduct, setSelectedProduct] =
     React.useState<ProductItem | null>(null);
+
+  const dispatch = useDispatch();
+  const isPopupVisible = useSelector(
+    (state: RootState) => state.popup.isPopupVisible
+  );
 
   React.useEffect(() => {
     if (id) {
@@ -60,7 +69,7 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
 
   const handleProductClick = (product: ProductItem) => {
     setSelectedProduct(product);
-    setIsPopupVisible(true);
+    dispatch(showPopup());
   };
 
   return (
@@ -78,11 +87,13 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
               <h1 className={styles.title}>{obtainedProducts[0]?.title}</h1>
             )}
           </div>
-          <div className={styles.category__buttons}>
+          <div className={styles.categoryButtons__wrapper}>
             {obtainedProducts?.map((category, index) => (
-              <a href="##" className={styles.button} key={index}>
-                <span>{category.category}</span>
-              </a>
+              <ButtonS className={styles.category__buttons}>
+                {/* <a href="##" className={styles.button__link} key={index}> */}
+                <span className={styles.button__text}>{category.category}</span>
+                {/* </a> */}
+              </ButtonS>
             ))}
           </div>
           <div>
@@ -115,25 +126,23 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
                             </span>
                           </div>
 
-                          <div className={styles.button__wrapper}>
-                            <div className={styles.button}>
-                              <span>{`${item.productPrice} ₽ `}</span>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                fill="none"
-                                className={styles.button__icon}
-                              >
-                                <path
-                                  fill="currentColor"
-                                  fillRule="evenodd"
-                                  d="M11.063 2.938a.937.937 0 1 1 1.874 0v6.5c0 .897.728 1.624 1.626 1.624h6.5a.937.937 0 1 1 0 1.876h-6.5c-.898 0-1.626.727-1.626 1.624v6.501a.937.937 0 1 1-1.874 0v-6.5c0-.898-.728-1.626-1.626-1.626H2.938a.937.937 0 1 1 0-1.874h6.5c.897-.001 1.624-.728 1.624-1.626V2.938"
-                                  clipRule="evenodd"
-                                ></path>
-                              </svg>
-                            </div>
-                          </div>
+                          <ButtonS>
+                            <span>{`${item.productPrice} ₽ `}</span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              fill="none"
+                              className={styles.button__icon}
+                            >
+                              <path
+                                fill="currentColor"
+                                fillRule="evenodd"
+                                d="M11.063 2.938a.937.937 0 1 1 1.874 0v6.5c0 .897.728 1.624 1.626 1.624h6.5a.937.937 0 1 1 0 1.876h-6.5c-.898 0-1.626.727-1.626 1.624v6.501a.937.937 0 1 1-1.874 0v-6.5c0-.898-.728-1.626-1.626-1.626H2.938a.937.937 0 1 1 0-1.874h6.5c.897-.001 1.624-.728 1.624-1.626V2.938"
+                                clipRule="evenodd"
+                              ></path>
+                            </svg>
+                          </ButtonS>
                         </div>
                       </div>
                     ))}
@@ -147,8 +156,10 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
       <ProductPopup
         productInfo={selectedProduct}
         isPopupVisible={isPopupVisible}
-        setIsPopupVisible={setIsPopupVisible}
+        setIsPopupVisible={() => dispatch(hidePopup())}
       />
+
+      {/* <RegistrationPopup isPopupVisible={isPopupVisible} /> */}
       <Footer />
     </>
   );
