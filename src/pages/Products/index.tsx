@@ -7,8 +7,8 @@ import Footer from "../../components/Footer";
 import { ProductPopup } from "../../components/ProductPopup";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { showPopup, hidePopup } from "../../redux/popup/slice";
-import { RegistrationPopup } from "../../components/RegistrationPopup";
+import { hidePopup, showProductPopup } from "../../redux/popup/slice";
+import {} from "../../components/RegistrationPopup";
 import { ButtonS } from "../../components/Buttons/ButtonS";
 
 export type ProductItem = {
@@ -44,7 +44,7 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
 
   const dispatch = useDispatch();
   const isPopupVisible = useSelector(
-    (state: RootState) => state.popup.isPopupVisible
+    (state: RootState) => state.popup.isProductPopupVisible
   );
 
   React.useEffect(() => {
@@ -69,7 +69,7 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
 
   const handleProductClick = (product: ProductItem) => {
     setSelectedProduct(product);
-    dispatch(showPopup());
+    dispatch(showProductPopup());
   };
 
   return (
@@ -155,11 +155,9 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
       </main>
       <ProductPopup
         productInfo={selectedProduct}
-        isPopupVisible={isPopupVisible}
+        isProductPopupVisible={isPopupVisible}
         setIsPopupVisible={() => dispatch(hidePopup())}
       />
-
-      {/* <RegistrationPopup isPopupVisible={isPopupVisible} /> */}
       <Footer />
     </>
   );

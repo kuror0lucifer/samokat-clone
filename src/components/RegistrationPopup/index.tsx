@@ -5,25 +5,17 @@ import { Overlay } from "../Popup/Overlay";
 import DrawerHeader from "../Popup/DrawerHeader";
 import { LoginForm } from "./LoginForm";
 
-type RegistrationPopupProps = {
-  isPopupVisible: boolean;
-};
+type RegistrationPopupProps = {};
 
-export const RegistrationPopup: React.FC<RegistrationPopupProps> = ({
-  isPopupVisible,
-}) => {
-  if (!isPopupVisible) return null;
-
+export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
   return (
-    isPopupVisible && (
-      <>
-        <Drawer>
-          <Overlay className={styles.drawerContainer}>
-            <DrawerHeader />
-            <LoginForm />
-          </Overlay>
-        </Drawer>
-      </>
-    )
+    <>
+      <Drawer>
+        <Overlay className={styles.drawerContainer}>
+          <DrawerHeader />
+          <LoginForm />
+        </Overlay>
+      </Drawer>
+    </>
   );
 };

@@ -1,26 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type PopupState = {
-  isPopupVisible: boolean;
+  isProductPopupVisible: boolean;
+  isRegistrationPopupVisible: boolean;
 };
 
 const initialState: PopupState = {
-  isPopupVisible: false,
+  isProductPopupVisible: false,
+  isRegistrationPopupVisible: false,
 };
 
 export const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    showPopup: (state) => {
-      state.isPopupVisible = true;
+    showRegistrationPopup: (state) => {
+      state.isRegistrationPopupVisible = true;
+    },
+    showProductPopup: (state) => {
+      state.isProductPopupVisible = true;
     },
     hidePopup: (state) => {
-      state.isPopupVisible = false;
+      state.isProductPopupVisible = false;
+      state.isRegistrationPopupVisible = false;
     },
   },
 });
 
-export const { showPopup, hidePopup } = popupSlice.actions;
+export const { showRegistrationPopup, showProductPopup, hidePopup } =
+  popupSlice.actions;
 
 export default popupSlice.reducer;

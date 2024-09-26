@@ -14,39 +14,37 @@ import { Drawer } from "../Popup/Drawer";
 
 type ProductPopupProps = {
   productInfo: ProductItem | null;
-  isPopupVisible: boolean;
+  isProductPopupVisible: boolean;
   setIsPopupVisible: (visible: boolean) => void;
 };
 
 export const ProductPopup: React.FC<ProductPopupProps> = ({
   productInfo,
-  isPopupVisible,
+  isProductPopupVisible,
   setIsPopupVisible,
 }) => {
-  if (!isPopupVisible) return null;
+  if (!isProductPopupVisible) return null;
 
   return (
-    isPopupVisible && (
-      <>
-        <Drawer>
-          <Overlay>
-            <DrawerHeader />
-            <div className={styles.root}>
-              <div className={styles.container}>
-                <ImgHeader productInfo={productInfo} />
-                <div className={styles.content}>
-                  <PopupTitle productInfo={productInfo} />
-                  <ShareButton />
-                  <Description productInfo={productInfo} />
-                  <Nutritions productInfo={productInfo} />
-                  <Attributes productInfo={productInfo} />
-                  <PriceButton productInfo={productInfo} />
-                </div>
+    <>
+      <Drawer>
+        <Overlay>
+          <DrawerHeader />
+          <div className={styles.root}>
+            <div className={styles.container}>
+              <ImgHeader productInfo={productInfo} />
+              <div className={styles.content}>
+                <PopupTitle productInfo={productInfo} />
+                <ShareButton />
+                <Description productInfo={productInfo} />
+                <Nutritions productInfo={productInfo} />
+                <Attributes productInfo={productInfo} />
+                <PriceButton productInfo={productInfo} />
               </div>
             </div>
-          </Overlay>
-        </Drawer>
-      </>
-    )
+          </div>
+        </Overlay>
+      </Drawer>
+    </>
   );
 };

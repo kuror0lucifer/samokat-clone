@@ -9,7 +9,7 @@ type DrawerHeaderProps = {};
 export const DrawerHeader: React.FC<DrawerHeaderProps> = () => {
   const dispatch = useDispatch();
   const isPopupVisible = useSelector(
-    (state: RootState) => state.popup.isPopupVisible
+    (state: RootState) => state.popup.isProductPopupVisible
   );
 
   return (

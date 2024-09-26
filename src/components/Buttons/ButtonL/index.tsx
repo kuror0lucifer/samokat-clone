@@ -2,11 +2,12 @@ import React from "react";
 
 type ButtonLProps = {
   children: React.ReactNode;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const ButtonL: React.FC<ButtonLProps> = ({ children }) => {
+export const ButtonL: React.FC<ButtonLProps> = ({ children, onClick }) => {
   return (
-    <button className="header__button-login">
+    <button className="header__button-login" onClick={onClick}>
       <svg
         width="24"
         height="24"

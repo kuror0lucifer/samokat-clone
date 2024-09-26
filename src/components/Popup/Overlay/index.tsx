@@ -16,7 +16,9 @@ export const Overlay: React.FC<OverlayProps> = ({ children, className }) => {
 
   const dispatch = useDispatch();
   const isPopupVisible = useSelector(
-    (state: RootState) => state.popup.isPopupVisible
+    (state: RootState) =>
+      state.popup.isProductPopupVisible ||
+      state.popup.isRegistrationPopupVisible
   );
 
   React.useEffect(() => {

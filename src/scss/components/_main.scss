@@ -23,7 +23,8 @@
     background-color: white;
     border-radius: 32px 32px 0 0;
 
-    z-index: 10000;
+    z-index: 50;
+
     border-radius: 32px 32px 0 0;
     height: 32px;
     width: 100%;
@@ -103,7 +104,7 @@
           line-height: 19px;
           letter-spacing: -0.05px;
           color: $dark-gray;
-          z-index: 100;
+          z-index: 40;
         }
 
         .card__container {
