@@ -1,0 +1,56 @@
+@import "../../../scss/variables";
+
+.root {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  margin-top: 10px;
+  filter: drop-shadow(0 4px 12px rgba(64, 64, 64, 0.1))
+    drop-shadow(0 0 4px rgba(64, 64, 64, 0.02));
+  background-color: #fff;
+
+  border-radius: 12px;
+
+  .arrow {
+    position: static;
+    height: 26px;
+
+    svg {
+      position: absolute;
+      top: -9px;
+      right: 0;
+      left: 50%;
+      height: 10px;
+      transform: translateX(-50%);
+    }
+  }
+
+  .icon {
+    position: relative;
+    height: 24px;
+  }
+
+  .title {
+    padding-bottom: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.1px;
+    color: #404040;
+  }
+
+  .title + .discription {
+    margin: 0;
+  }
+
+  .description {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0.02px;
+    color: #a6a6a6;
+  }
+}
