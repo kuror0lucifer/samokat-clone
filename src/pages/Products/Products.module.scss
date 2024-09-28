@@ -1,29 +1,5 @@
 @import "../../scss/_variables.scss";
 
-.return {
-  display: flex;
-  align-items: center;
-  width: 48px;
-  height: 32px;
-  padding: 0 16px;
-  margin-right: 10px;
-
-  border-radius: 20px;
-  border: 0;
-
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e0e0e0;
-    transition: all 200ms ease-in;
-  }
-
-  &__icon {
-    width: 16px;
-    height: 16px;
-  }
-}
-
 .text__container {
   display: flex;
 }

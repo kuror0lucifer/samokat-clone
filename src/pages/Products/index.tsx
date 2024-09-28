@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { FaArrowLeft } from "react-icons/fa6";
 import styles from "./Products.module.scss";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
@@ -10,6 +9,7 @@ import { RootState } from "../../redux/store";
 import { hidePopup, showProductPopup } from "../../redux/popup/slice";
 import {} from "../../components/RegistrationPopup";
 import { ButtonS } from "../../components/Buttons/ButtonS";
+import { NavbarBack } from "../../components/Navbar/NavbarBack";
 
 export type ProductItem = {
   productName: string;
@@ -78,9 +78,7 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
         <div className="main__container">
           <div className="text__container">
             <Link to="../" onClick={() => handleClick()}>
-              <button className={styles.return}>
-                <FaArrowLeft className={styles.return__icon} />
-              </button>
+              <NavbarBack />
             </Link>
 
             {obtainedProducts && (
