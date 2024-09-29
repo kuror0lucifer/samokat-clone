@@ -4,11 +4,21 @@ import { ButtonM } from "../../Buttons/ButtonM";
 import { SberIdForm } from "../SberIdForm";
 import { HelpCard } from "../HelpCard";
 
-export const LoginForm = () => {
+type LoginFormProps = {
+  handleClickLogin: () => void;
+  isPhoneLogin: boolean;
+};
+
+export const LoginForm: React.FC<LoginFormProps> = ({
+  handleClickLogin,
+  isPhoneLogin,
+}) => {
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>
-        <ButtonM className={styles.buttonM}>Войти по номеру телефона</ButtonM>
+        <ButtonM className={styles.buttonM} onClick={handleClickLogin}>
+          Войти по номеру телефона
+        </ButtonM>
         <SberIdForm />
         <HelpCard />
       </div>

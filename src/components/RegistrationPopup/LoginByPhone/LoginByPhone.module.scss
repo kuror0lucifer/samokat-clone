@@ -1,33 +1,4 @@
 @import "../../../scss/variables";
-.drawerNavbar {
-  .root {
-    position: sticky;
-    top: 0;
-    z-index: 4;
-    background: var(--color-white);
-    transition: background-color 0.15s ease-in-out;
-
-    .navbar {
-      position: relative;
-      display: flex;
-      flex-flow: row nowrap;
-      align-items: center;
-      justify-content: center;
-      height: 36px;
-      margin: 24px 24px 16px;
-
-      .navbar__back {
-        position: absolute;
-        left: 0;
-      }
-
-      .navbar__cancel {
-        position: absolute;
-        right: 0;
-      }
-    }
-  }
-}
 
 .form {
   position: relative;

@@ -1,0 +1,38 @@
+.drawerNavbar {
+  .root {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    transition: background-color 0.15s ease-in-out;
+
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      margin: 24px 24px 16px;
+
+      .back {
+        position: absolute;
+        left: 0;
+      }
+
+      .title {
+        span {
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 22px;
+          letter-spacing: -0.38px;
+          color: rgb(64, 64, 64);
+        }
+      }
+
+      .cancel {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}
