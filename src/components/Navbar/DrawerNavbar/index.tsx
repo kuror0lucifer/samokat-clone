@@ -7,12 +7,14 @@ type DrawerNavbarProps = {
   handleNavbarBackClick?: () => void;
   phone?: string;
   isClick?: boolean;
+  email?: string;
 };
 
 export const DrawerNavbar: React.FC<DrawerNavbarProps> = ({
   handleNavbarBackClick,
   phone,
   isClick,
+  email,
 }) => {
   return (
     <div className={styles.drawerNavbar}>
@@ -22,7 +24,7 @@ export const DrawerNavbar: React.FC<DrawerNavbarProps> = ({
             <NavbarBack onClick={handleNavbarBackClick} />
           </div>
           <div className={styles.title}>
-            {isClick ? <span>{phone}</span> : null}
+            {isClick ? <span>{phone || email}</span> : null}
           </div>
           <div className={styles.cancel}>
             <DrawerHeader />

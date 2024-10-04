@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 import cors from "cors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import bodyParser from "body-parser";
+import nodemailer from "nodemailer";
+import crypto from "crypto";
 
 import CategoryModel from "./models/Categories.js";
 import ProductsModel from "./models/Products.js";
 
-import { validationResult } from "express-validator";
-import { registerValidation } from "./validation/auth.js";
-
-import UserModel from "./models/User.js";
+import User from "./models/User.js";
 
 import dotenv from "dotenv";
 
@@ -18,6 +18,24 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.rambler.ru",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.PASS,
+  },
+});
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(process.env.DB_CONN)
@@ -59,89 +77,74 @@ app.get(`/getProducts/:subcategoryId`, (req, res) => {
     );
 });
 
-app.post("/auth/login", async (req, res) => {
+app.post("/register", async (req, res) => {
+  const { email } = req.body;
+
   try {
-    const user = await UserModel.findOne({ email: req.body.email });
-
-    if (!user) {
-      return res.status(404).json({
-        message: "Пользователь не найден",
-      });
+    let user = await User.findOne({ email });
+    if (user) {
+      return res
+        .status(400)
+        .json({ message: "Пользователь с такой почтой уже существует" });
     }
 
-    const isValidPass = await bcrypt.compare(
-      req.body.password,
-      user._doc.passwordHash
-    );
+    const verificationCode = crypto.randomBytes(2).toString("hex");
+    const codeExpires = Date.now() + 3600000;
 
-    if (!isValidPass) {
-      return res.status(400).json({
-        message: "Неверный логин или пароль",
-      });
-    }
+    user = new User({
+      email,
+      verificationCode,
+      codeExpires,
+    });
+    await user.save();
 
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      "secret123",
-      {
-        expiresIn: "30d",
+    const mailOptions = {
+      from: process.env.MAIL,
+      to: email,
+      subject: "Подтверджение регистрации",
+      text: `Ваш код для подтверждения: ${verificationCode}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error while sending email:", error);
+        return res.status(500).json({ message: "Ошибка при отправке почты." });
       }
-    );
-
-    const { passwordHash, ...userData } = user._doc;
-
-    res.json({
-      ...userData,
-      token,
+      res.status(200).json({
+        message: "Регистрация успешна. Проверьте почту для подтверждения.",
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      message: "Не удалось авторизоваться",
-    });
+  } catch (error) {
+    res.status(500).json({ message: "Ошибка сервера", error });
   }
 });
 
-app.post("/auth/register", registerValidation, async (req, res) => {
+app.post("/verify", async (req, res) => {
+  const { email, verificationCode } = req.body;
+
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json(errors.array());
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "Пользователь не найден" });
     }
 
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    if (user.codeExpires < Date.now()) {
+      return res.status(400).json({ message: "Код истек" });
+    }
 
-    const doc = new UserModel({
-      email: req.body.email,
-      fullName: req.body.fullName,
-      passwordHash: hash,
-    });
+    if (user.verificationCode !== verificationCode) {
+      return res.status(400).json({ message: "Неправильный код" });
+    }
 
-    const user = await doc.save();
+    user.isVerified = true;
+    user.verificationCode = undefined;
+    user.codeExpires = undefined;
+    await user.save();
 
-    const token = jwt.sign(
-      {
-        _id: user._id,
-      },
-      "secret123",
-      {
-        expiresIn: "30d",
-      }
-    );
-
-    const { passwordHash, ...userData } = user._doc;
-
-    res.json({
-      ...userData,
-      token,
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Не удалось зарегистрироваться",
-    });
+    res.status(200).json({ message: "Email успешно подтвержден" });
+  } catch (error) {
+    res.status(500).json({ message: "Ошибка сервера", error });
   }
 });
 

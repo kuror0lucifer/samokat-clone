@@ -1,12 +1,17 @@
 import React from "react";
 import styles from "./VerificationCodeForm.module.scss";
 
+import axios from "axios";
+import { ButtonM } from "../../Buttons/ButtonM";
+
 type VerificationCodeFormProps = {
   phone?: string;
+  email?: string;
 };
 
 export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
   phone,
+  email,
 }) => {
   const input1Ref = React.useRef<HTMLInputElement>(null);
   const input2Ref = React.useRef<HTMLInputElement>(null);
@@ -19,6 +24,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
     input3: "",
     input4: "",
   });
+  const [message, setMessage] = React.useState<string>("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -37,16 +43,39 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
     }
   };
 
+  const collectVerificationCode = () => {
+    console.log(
+      `${values.input1}${values.input2}${values.input3}${values.input4}`
+    );
+    return `${values.input1}${values.input2}${values.input3}${values.input4}`;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const verificationCode = collectVerificationCode();
+
+    try {
+      const response = await axios.post("http://localhost:4000/verify", {
+        email,
+        verificationCode,
+      });
+
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage("Ошибка при подтверждении");
+    }
+  };
+
   return (
     <>
-      <form action="" className={styles.form}>
+      <form action="" className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="" className={styles.formField}>
-          <span>Код из смс</span>
+          <span>Код из сообщения</span>
           <div className={styles.control}>
             <input
               type="text"
-              inputMode="numeric"
-              pattern="\d{1}"
+              inputMode="text"
               autoComplete="one-time-code"
               ref={input1Ref}
               value={values.input1}
@@ -55,8 +84,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
             />
             <input
               type="text"
-              inputMode="numeric"
-              pattern="\d{1}"
+              inputMode="text"
               ref={input2Ref}
               value={values.input2}
               maxLength={1}
@@ -64,8 +92,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
             />
             <input
               type="text"
-              inputMode="numeric"
-              pattern="\d{1}"
+              inputMode="text"
               ref={input3Ref}
               value={values.input3}
               maxLength={1}
@@ -73,8 +100,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
             />
             <input
               type="text"
-              inputMode="numeric"
-              pattern="\d{1}"
+              inputMode="text"
               ref={input4Ref}
               value={values.input4}
               maxLength={1}
@@ -82,7 +108,9 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
             />
           </div>
         </label>
+        <ButtonM type="submit">Подтвердить</ButtonM>
       </form>
+      {message && <p>{message}</p>}
     </>
   );
 };

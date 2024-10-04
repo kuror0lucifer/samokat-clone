@@ -6,18 +6,25 @@ import DrawerHeader from "../Popup/DrawerHeader";
 import { LoginForm } from "./LoginForm";
 import { LoginByPhone } from "./LoginByPhone";
 import { VerificationCodeForm } from "./VerificationCodeForm";
+import { LoginByEmail } from "./LoginByEmail";
 
 type RegistrationPopupProps = {};
 
 export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
   const [isPhoneLogin, setPhoneLogin] = React.useState<boolean>(false);
+  const [isEmailLogin, setEmailLogin] = React.useState<boolean>(false);
 
-  const handleClickLogin = () => {
+  const handleClickLoginByPhone = () => {
     setPhoneLogin(true);
+  };
+
+  const handleClickLoginByEmail = () => {
+    setEmailLogin(true);
   };
 
   const handleNavbarBackClick = () => {
     setPhoneLogin(false);
+    setEmailLogin(false);
   };
 
   return (
@@ -26,17 +33,17 @@ export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
         <Overlay className={styles.drawerContainer}>
           {isPhoneLogin ? (
             <LoginByPhone handleNavbarBackClick={handleNavbarBackClick} />
+          ) : isEmailLogin ? (
+            <LoginByEmail handleNavbarBackClick={handleNavbarBackClick} />
           ) : (
             <>
               <DrawerHeader />
               <LoginForm
-                handleClickLogin={handleClickLogin}
-                isPhoneLogin={isPhoneLogin}
+                handleClickLoginByPhone={handleClickLoginByPhone}
+                handleClickLoginByEmail={handleClickLoginByEmail}
               />
             </>
           )}
-
-          {/* <VerificationCodeForm /> */}
         </Overlay>
       </Drawer>
     </>
