@@ -1,11 +1,12 @@
 import React from "react";
-import Search from "./Search";
-import logo from "../assets/header__logo.svg";
-import { ButtonL } from "./Buttons/ButtonL";
+import Search from "../Search";
+import logo from "../../assets/header__logo.svg";
+import { ButtonL } from "../Buttons/ButtonL";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { RegistrationPopup } from "./RegistrationPopup";
-import { showRegistrationPopup } from "../redux/popup/slice";
+import { RootState } from "../../redux/store";
+import { RegistrationPopup } from "../RegistrationPopup";
+import { showRegistrationPopup } from "../../redux/popup/slice";
+import styles from "./Header.module.scss";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,8 +15,17 @@ const Header: React.FC = () => {
   );
 
   return (
-    <header className="header">
-      {<img src={logo} alt="header_logo" className="header__logo" />}
+    <header className={styles.header}>
+      <a href="##" className={styles.logo}>
+        <img
+          src={logo}
+          alt="header_logo"
+          width={153}
+          height={23}
+          loading="lazy"
+        />
+      </a>
+
       <Search />
       <ButtonL
         onClick={(event: React.MouseEvent<HTMLButtonElement>) =>

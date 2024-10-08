@@ -10,6 +10,7 @@
   background-color: $gray;
   margin-top: 6px;
   border-radius: 40px;
+  cursor: pointer;
 
   &:hover {
     background-color: #e0e0e0;
@@ -34,4 +35,26 @@
       height: 24px;
     }
   }
+}
+
+.theme_primary {
+  color: white;
+  background-color: $coral;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+
+  &:hover {
+    background-color: #ff194b;
+  }
+}
+
+.theme_secondary {
+  color: $dark-gray;
+  background-color: $gray;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.1px;
 }

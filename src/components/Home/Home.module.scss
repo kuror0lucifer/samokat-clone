@@ -1,0 +1,14 @@
+.sections {
+  position: relative;
+  top: 88px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  padding: 0 24px 24px;
+
+  @media screen and (max-width: 1919px) {
+    top: 80px;
+    gap: 16px;
+    padding: 0 16px 16px;
+  }
+}

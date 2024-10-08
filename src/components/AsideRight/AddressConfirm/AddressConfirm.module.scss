@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 24px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+}

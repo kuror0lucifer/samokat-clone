@@ -1,0 +1,33 @@
+.aside__left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 264px;
+  flex-shrink: 0;
+
+  .sidebar {
+    position: fixed;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 1919px) {
+  .aside__left,
+  .aside__left .sidebar {
+    max-width: 234px;
+  }
+}
+
+.aside__left .sidebar {
+  max-height: calc(100% - 88px - 24px);
+  padding: 24px 0;
+}
+
+.aside__left,
+.aside__left .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}

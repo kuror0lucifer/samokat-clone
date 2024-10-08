@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./ButtonL.module.scss";
 
 type ButtonLProps = {
   children: React.ReactNode;
@@ -7,7 +8,7 @@ type ButtonLProps = {
 
 export const ButtonL: React.FC<ButtonLProps> = ({ children, onClick }) => {
   return (
-    <button className="header__button-login" onClick={onClick}>
+    <button className={styles.button} onClick={onClick}>
       <svg
         width="24"
         height="24"

@@ -8,7 +8,11 @@ type ButtonSProps = {
 
 export const ButtonS: React.FC<ButtonSProps> = ({ children, className }) => {
   return (
-    <div className={styles.button__wrapper}>
+    <div
+      className={`${styles.button__wrapper} ${
+        className ? styles[className] : ""
+      }`}
+    >
       <div className={styles.button}>{children}</div>
     </div>
   );
