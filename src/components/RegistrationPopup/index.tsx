@@ -1,11 +1,11 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import styles from "./RegistrationPopup.module.scss";
 import { Drawer } from "../Popup/Drawer";
 import { Overlay } from "../Popup/Overlay";
 import DrawerHeader from "../Popup/DrawerHeader";
 import { LoginForm } from "./LoginForm";
 import { LoginByPhone } from "./LoginByPhone";
-import { VerificationCodeForm } from "./VerificationCodeForm";
 import { LoginByEmail } from "./LoginByEmail";
 
 type RegistrationPopupProps = {};
@@ -13,6 +13,8 @@ type RegistrationPopupProps = {};
 export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
   const [isPhoneLogin, setPhoneLogin] = React.useState<boolean>(false);
   const [isEmailLogin, setEmailLogin] = React.useState<boolean>(false);
+
+  const portalRoot = document.getElementById("portal-root");
 
   const handleClickLoginByPhone = () => {
     setPhoneLogin(true);
@@ -27,7 +29,7 @@ export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
     setEmailLogin(false);
   };
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <Drawer>
         <Overlay className={styles.drawerContainer}>
@@ -46,6 +48,7 @@ export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
           )}
         </Overlay>
       </Drawer>
-    </>
+    </>,
+    portalRoot
   );
 };

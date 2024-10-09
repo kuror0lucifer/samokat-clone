@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import styles from "./ProductPopup.module.scss";
 import { ProductItem } from "../../pages/Products";
 import { DrawerHeader } from "../Popup/DrawerHeader";
@@ -25,7 +26,9 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
 }) => {
   if (!isProductPopupVisible) return null;
 
-  return (
+  const portalRoot = document.getElementById("portal-root");
+
+  return ReactDOM.createPortal(
     <>
       <Drawer>
         <Overlay>
@@ -45,6 +48,7 @@ export const ProductPopup: React.FC<ProductPopupProps> = ({
           </div>
         </Overlay>
       </Drawer>
-    </>
+    </>,
+    portalRoot
   );
 };
