@@ -2,12 +2,10 @@ import React from "react";
 import axios from "axios";
 import styles from "./Products.module.scss";
 import { Link } from "react-router-dom";
-import Footer from "../../components/Footer";
 import { ProductPopup } from "../../components/ProductPopup";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { hidePopup, showProductPopup } from "../../redux/popup/slice";
-import {} from "../../components/RegistrationPopup";
 import { ButtonS } from "../../components/Buttons/ButtonS";
 import { NavbarBack } from "../../components/Navbar/NavbarBack";
 
@@ -100,10 +98,11 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
                 <h1 className={styles.title}>{category.category}</h1>
                 <a href="##">
                   <div className={styles.cards}>
-                    {category.items.map((item) => (
+                    {category.items.map((item, index) => (
                       <div
                         className={styles.productCard__root}
                         onClick={() => handleProductClick(item)}
+                        key={index}
                       >
                         <div className={styles.productImg__root}>
                           <img
@@ -156,7 +155,7 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
         isProductPopupVisible={isPopupVisible}
         setIsPopupVisible={() => dispatch(hidePopup())}
       />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

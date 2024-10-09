@@ -44,9 +44,6 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
   };
 
   const collectVerificationCode = () => {
-    console.log(
-      `${values.input1}${values.input2}${values.input3}${values.input4}`
-    );
     return `${values.input1}${values.input2}${values.input3}${values.input4}`;
   };
 

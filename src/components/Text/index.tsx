@@ -5,17 +5,11 @@ type TextProps = {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  key?: string;
 };
 
-export const Text: React.FC<TextProps> = ({
-  children,
-  className,
-  style,
-  key,
-}) => {
+export const Text: React.FC<TextProps> = ({ children, className, style }) => {
   return (
-    <span className={styles[className]} key={key} style={style}>
+    <span className={styles[className]} style={style}>
       {children}
     </span>
   );

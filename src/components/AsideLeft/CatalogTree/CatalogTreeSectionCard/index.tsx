@@ -41,10 +41,9 @@ export const CatalogTreeSectionCard = () => {
   return (
     <>
       {categories.map((category) => (
-        <>
+        <React.Fragment key={category._id}>
           <div
             className={styles.details}
-            key={category._id}
             onClick={() => onClickCategory(category._id)}
           >
             <div className={styles.icon}>
@@ -82,7 +81,7 @@ export const CatalogTreeSectionCard = () => {
               ))}
             </div>
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   );

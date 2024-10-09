@@ -11,8 +11,6 @@ type HomeProps = {
 };
 
 const Home: React.FC<HomeProps> = ({ id, setId }) => {
-  console.log(styles.sections);
-
   return (
     <section className={styles.sections}>
       <Categories />

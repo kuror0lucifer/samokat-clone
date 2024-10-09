@@ -44,7 +44,7 @@ export const CategoriesGrid: React.FC<CategoriesGridProps> = ({
   return (
     <>
       {mainCategories.map((category, index) => (
-        <div className={styles.root}>
+        <div className={styles.root} key={category._id}>
           {index > 0 ? (
             <Text
               key={category._id}

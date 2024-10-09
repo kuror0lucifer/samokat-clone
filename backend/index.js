@@ -44,6 +44,7 @@ mongoose
 
 app.get("/getCategories", (req, res) => {
   CategoryModel.find()
+    .sort({ index: -1 })
     .then((categories) => res.json(categories))
     .catch((err) => res.json(err));
 });

@@ -3,8 +3,18 @@ import styles from "./Card.module.scss";
 import { Text } from "../Text";
 import { MainCategoryLink } from "../../pages/Main/CategoriesGrid/MainCategoryLink";
 
+interface Subcategory {
+  subcategoryId: string;
+  subcategoryImg: string;
+  title: string;
+}
+
+interface Category {
+  subcategories: Subcategory[];
+}
+
 type CardProps = {
-  category: any;
+  category: Category;
   id: string;
   setId: (id: string) => void;
 };
@@ -16,13 +26,14 @@ export const Card: React.FC<CardProps> = ({ category, id, setId }) => {
 
   return (
     <>
-      {category.subcategories.map((subcategory) => (
+      {category.subcategories.map((subcategory: Subcategory, index) => (
         <MainCategoryLink
+          key={index}
           onClick={() => {
             onClickId(subcategory.subcategoryId);
           }}
         >
-          <div className={styles.root} key={subcategory.subcategoryId}>
+          <div className={styles.root}>
             <div className={styles.imageContainer}>
               <img
                 src={subcategory.subcategoryImg}

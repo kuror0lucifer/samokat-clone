@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
 import styles from "./Main.module.scss";
 import { InlineSearch } from "./InlineSearch";
-import { CategoriesGrid } from "./CategoriesGrid";
 
 type MainCategoriesItem = {
   _id: string;
