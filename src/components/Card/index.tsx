@@ -43,7 +43,7 @@ export const Card: React.FC<CardProps> = ({ category, id, setId }) => {
               />
             </div>
             <div className={styles.text}>
-              <Text className="semiBold">{subcategory.title}</Text>
+              <Text className="p2SemiBold">{subcategory.title}</Text>
             </div>
           </div>
         </MainCategoryLink>

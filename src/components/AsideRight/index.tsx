@@ -4,10 +4,10 @@ import { EmptyAddress } from "./EmptyAddress";
 
 export const AsideRight = () => {
   return (
-    <div className={styles.right}>
+    <aside className={styles.right}>
       <div className={styles.sidebar}>
         <EmptyAddress />
       </div>
-    </div>
+    </aside>
   );
 };

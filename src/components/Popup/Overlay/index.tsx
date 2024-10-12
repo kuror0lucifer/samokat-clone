@@ -8,6 +8,7 @@ import { hidePopup } from "../../../redux/popup/slice";
 type OverlayProps = {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 };
 
 export const Overlay: React.FC<OverlayProps> = ({ children, className }) => {
@@ -15,9 +16,10 @@ export const Overlay: React.FC<OverlayProps> = ({ children, className }) => {
   const [isAnimating, setIsAnimating] = React.useState(false);
 
   const dispatch = useDispatch();
+
   const isPopupVisible = useSelector(
     (state: RootState) =>
-      state.popup.isProductPopupVisible ||
+      state.popup.visibleProductId !== null ||
       state.popup.isRegistrationPopupVisible
   );
 

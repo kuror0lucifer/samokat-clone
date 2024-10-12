@@ -8,6 +8,9 @@ import { RootState } from "../../redux/store";
 import { hidePopup, showProductPopup } from "../../redux/popup/slice";
 import { ButtonS } from "../../components/Buttons/ButtonS";
 import { NavbarBack } from "../../components/Navbar/NavbarBack";
+import { InlineSearch } from "../Main/InlineSearch";
+import { InlineSearchProducts } from "./InlineSearchProducts";
+import Footer from "../../components/Footer";
 
 export type ProductItem = {
   productName: string;
@@ -34,46 +37,11 @@ type productsProps = {
 };
 
 export const Products: React.FC<productsProps> = ({ id, setId }) => {
-  const [obtainedProducts, setObtainedProducts] =
-    React.useState<ProductsResponse | null>(null);
-
-  const [selectedProduct, setSelectedProduct] =
-    React.useState<ProductItem | null>(null);
-
-  const dispatch = useDispatch();
-  const isPopupVisible = useSelector(
-    (state: RootState) => state.popup.isProductPopupVisible
-  );
-
-  React.useEffect(() => {
-    if (id) {
-      const fetchProducts = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:4000/getProducts/${id}`
-          );
-          setObtainedProducts(response.data);
-        } catch (err) {
-          console.error("Ошибка получения продуктов: ", err);
-        }
-      };
-      fetchProducts();
-    }
-  }, [id]);
-
-  const handleClick = () => {
-    setId(null);
-  };
-
-  const handleProductClick = (product: ProductItem) => {
-    setSelectedProduct(product);
-    dispatch(showProductPopup());
-  };
-
   return (
     <>
-      <main className="main">
-        <div className="main__container">
+      <main className={styles.content}>
+        <InlineSearchProducts id={id} setId={setId} />
+        {/* <div className="main__container">
           <div className="text__container">
             <Link to="../" onClick={() => handleClick()}>
               <NavbarBack />
@@ -86,9 +54,9 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
           <div className={styles.categoryButtons__wrapper}>
             {obtainedProducts?.map((category, index) => (
               <ButtonS className={styles.category__buttons}>
-                {/* <a href="##" className={styles.button__link} key={index}> */}
+                <a href="##" className={styles.button__link} key={index}>
                 <span className={styles.button__text}>{category.category}</span>
-                {/* </a> */}
+                </a>
               </ButtonS>
             ))}
           </div>
@@ -148,14 +116,9 @@ export const Products: React.FC<productsProps> = ({ id, setId }) => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
+        <Footer />
       </main>
-      <ProductPopup
-        productInfo={selectedProduct}
-        isProductPopupVisible={isPopupVisible}
-        setIsPopupVisible={() => dispatch(hidePopup())}
-      />
-      {/* <Footer /> */}
     </>
   );
 };

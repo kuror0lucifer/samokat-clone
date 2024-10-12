@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type PopupState = {
   isProductPopupVisible: boolean;
   isRegistrationPopupVisible: boolean;
+  visibleProductId: null | string;
 };
 
 const initialState: PopupState = {
   isProductPopupVisible: false,
   isRegistrationPopupVisible: false,
+  visibleProductId: null,
 };
 
 export const popupSlice = createSlice({
@@ -17,11 +19,11 @@ export const popupSlice = createSlice({
     showRegistrationPopup: (state) => {
       state.isRegistrationPopupVisible = true;
     },
-    showProductPopup: (state) => {
-      state.isProductPopupVisible = true;
+    showProductPopup: (state, action) => {
+      state.visibleProductId = action.payload;
     },
     hidePopup: (state) => {
-      state.isProductPopupVisible = false;
+      state.visibleProductId = null;
       state.isRegistrationPopupVisible = false;
     },
   },

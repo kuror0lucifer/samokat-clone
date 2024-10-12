@@ -1,0 +1,21 @@
+@import "../../../../scss/variables";
+.root {
+  display: flex;
+  flex-flow: row wrap;
+  row-gap: 8px;
+  column-gap: 4px;
+  justify-content: flex-start;
+  margin: 20px 0 40px;
+
+  .buttons {
+    .link {
+      .category {
+        color: $dark-gray;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        letter-spacing: -0.1px;
+      }
+    }
+  }
+}

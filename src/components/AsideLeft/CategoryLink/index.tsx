@@ -13,7 +13,7 @@ export const CategoryLink: React.FC<CategoryLinkProps> = ({
 }) => {
   return (
     <a href="##" className={`${styles.root} ${className}`}>
-      <Text className="semiBold">{children}</Text>
+      <Text className="p2SemiBold">{children}</Text>
     </a>
   );
 };

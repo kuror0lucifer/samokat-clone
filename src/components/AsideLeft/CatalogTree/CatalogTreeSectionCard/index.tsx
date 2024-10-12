@@ -69,7 +69,7 @@ export const CatalogTreeSectionCard = () => {
                 style={{ backgroundImage: `url(${category.imageUrl})` }}
               ></div>
             </div>
-            <Text className="semiBold">{category.title}</Text>
+            <Text className="p2SemiBold">{category.title}</Text>
           </div>
 
           {showSubcategories[category._id] && (
