@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { hidePopup, showProductPopup } from "../../redux/popup/slice";
 import { ProductPopup } from "../ProductPopup";
-import ReactDOM from "react-dom";
 
 export type ProductItem = {
   productName: string;
@@ -42,10 +41,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
   );
 
   const handleProductClick = (product: ProductItem) => {
-    console.log(selectedProduct);
     setSelectedProduct(item);
     dispatch(showProductPopup(product.productId));
-    console.log(selectedProduct);
   };
 
   return (

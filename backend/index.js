@@ -1,9 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import bodyParser from "body-parser";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 

@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type PopupState = {
-  isProductPopupVisible: boolean;
-  isRegistrationPopupVisible: boolean;
-  visibleProductId: null | string;
-};
+import PopupState from "./types";
 
 const initialState: PopupState = {
   isProductPopupVisible: false,
