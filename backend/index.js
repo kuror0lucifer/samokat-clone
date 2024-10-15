@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -9,11 +10,8 @@ import ProductsModel from "./models/Products.js";
 
 import User from "./models/User.js";
 
-import dotenv from "dotenv";
-
 dotenv.config();
 const app = express();
-app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
@@ -21,8 +19,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: process.env.MAIL,
-    pass: process.env.PASS,
+    user: `${process.env.MAIL}`,
+    pass: `${process.env.PASS}`,
   },
 });
 
@@ -34,8 +32,10 @@ app.use(
   })
 );
 
+const DBConnection = process.env.DB_CONN;
+
 mongoose
-  .connect(process.env.DB_CONN)
+  .connect(`${DBConnection}`)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Failed to connect to MongoDB", err));
 
