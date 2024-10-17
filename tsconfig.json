@@ -4,6 +4,7 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "esModuleInterop": true,
     "strict": true,
     "baseUrl": "./",

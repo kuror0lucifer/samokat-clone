@@ -29,6 +29,11 @@ export const RegistrationPopup: React.FC<RegistrationPopupProps> = () => {
     setEmailLogin(false);
   };
 
+  if (!portalRoot) {
+    console.error("Элемент с ID 'portal-root' не найден в DOM.");
+    return null;
+  }
+
   return ReactDOM.createPortal(
     <>
       <Drawer>
