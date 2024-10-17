@@ -4,11 +4,15 @@ import mongoose from "mongoose";
 import cors from "cors";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
+
+import { validationResult } from "express-validator";
 
 import CategoryModel from "./models/Categories.js";
 import ProductsModel from "./models/Products.js";
-
 import User from "./models/User.js";
+
+import registerValidation from "./validation/auth.js";
 
 dotenv.config();
 const app = express();
@@ -75,10 +79,15 @@ app.get(`/getProducts/:subcategoryId`, (req, res) => {
     );
 });
 
-app.post("/register", async (req, res) => {
-  const { email } = req.body;
-
+app.post("/register", registerValidation, async (req, res) => {
   try {
+    const { email } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json(errors.array());
+    }
+
     let user = await User.findOne({ email });
     if (user) {
       return res
@@ -86,21 +95,31 @@ app.post("/register", async (req, res) => {
         .json({ message: "Пользователь с такой почтой уже существует" });
     }
 
-    const verificationCode = crypto.randomBytes(2).toString("hex");
-    const codeExpires = Date.now() + 3600000;
+    const code = crypto.randomBytes(2).toString("hex");
+    const codeLifeTime = Date.now() + 3600000;
 
     user = new User({
       email,
-      verificationCode,
-      codeExpires,
+      verificationCode: code,
+      codeExpires: codeLifeTime,
     });
-    await user.save();
+    const profile = await user.save();
+
+    const token = jwt.sign(
+      {
+        _id: profile._id,
+      },
+      "token",
+      {
+        expiresIn: "30d",
+      }
+    );
 
     const mailOptions = {
       from: process.env.MAIL,
       to: email,
       subject: "Подтверджение регистрации",
-      text: `Ваш код для подтверждения: ${verificationCode}`,
+      text: `Ваш код для подтверждения: ${code}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -111,6 +130,13 @@ app.post("/register", async (req, res) => {
       res.status(200).json({
         message: "Регистрация успешна. Проверьте почту для подтверждения.",
       });
+    });
+
+    const { verificationCode, codeExpires, ...userData } = profile._doc;
+
+    res.json({
+      ...userData,
+      token,
     });
   } catch (error) {
     res.status(500).json({ message: "Ошибка сервера", error });
