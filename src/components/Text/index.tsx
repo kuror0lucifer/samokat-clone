@@ -9,7 +9,7 @@ type TextProps = {
 
 export const Text: React.FC<TextProps> = ({ children, className, style }) => {
   return (
-    <span className={styles[className]} style={style}>
+    <span className={className ? styles[className] : undefined} style={style}>
       {children}
     </span>
   );

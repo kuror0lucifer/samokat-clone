@@ -7,8 +7,6 @@ import { ButtonM } from "../../Buttons/ButtonM";
 
 import axios from "axios";
 
-import { useDispatch } from "react-redux";
-
 type LoginByEmailProps = {
   handleNavbarBackClick: () => void;
 };
