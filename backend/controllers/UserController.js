@@ -45,16 +45,6 @@ export const register = async (req, res) => {
     });
     const profile = await user.save();
 
-    const token = jwt.sign(
-      {
-        _id: profile._id,
-      },
-      process.env.TOKEN,
-      {
-        expiresIn: "30d",
-      }
-    );
-
     const mailOptions = {
       from: process.env.MAIL,
       to: email,
@@ -69,7 +59,7 @@ export const register = async (req, res) => {
       }
       res.status(200).json({
         message: "Регистрация успешна. Проверьте почту для подтверждения.",
-        token,
+        user: userData,
       });
     });
 
@@ -77,7 +67,6 @@ export const register = async (req, res) => {
 
     res.json({
       ...userData,
-      token,
     });
   } catch (error) {
     res.status(500).json({ message: "Ошибка сервера", error });
@@ -105,9 +94,20 @@ export const verify = async (req, res) => {
     user.isVerified = true;
     user.verificationCode = undefined;
     user.codeExpires = undefined;
-    await user.save();
+    const profile = await user.save();
 
-    res.status(200).json({ message: "Email успешно подтвержден" });
+    const token = jwt.sign(
+      {
+        _id: profile._id,
+        email: profile.email,
+      },
+      process.env.TOKEN,
+      {
+        expiresIn: "30d",
+      }
+    );
+
+    res.status(200).json({ message: "Email успешно подтвержден", token });
   } catch (error) {
     res.status(500).json({ message: "Ошибка сервера", error });
   }

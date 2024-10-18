@@ -7,6 +7,9 @@ import { RootState } from "../../redux/store";
 import { RegistrationPopup } from "../RegistrationPopup";
 import { showRegistrationPopup } from "../../redux/popup/slice";
 import styles from "./Header.module.scss";
+import { Link } from "react-router-dom";
+import { setToken } from "@/redux/auth/slice";
+import { ProfilePopup } from "../ProfilePopup";
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,9 +17,19 @@ const Header: React.FC = () => {
     (state: RootState) => state.popup.isRegistrationPopupVisible
   );
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("authToken");
+
+    if (token) {
+      dispatch(setToken(token));
+    }
+  }, [dispatch]);
+
+  const token = useSelector((state: RootState) => state.auth.token);
+
   return (
     <header className={styles.header}>
-      <a href="##" className={styles.logo}>
+      <Link to="../" className={styles.logo}>
         <img
           src={logo}
           alt="header_logo"
@@ -24,7 +37,7 @@ const Header: React.FC = () => {
           height={23}
           loading="lazy"
         />
-      </a>
+      </Link>
 
       <Search />
       <ButtonL
@@ -32,11 +45,12 @@ const Header: React.FC = () => {
           dispatch(showRegistrationPopup())
         }
       >
-        <span>Войти</span>
+        <span>{token ? "Профиль" : "Войти"}</span>
       </ButtonL>
-      {isPopupVisible && <RegistrationPopup />}
+      {isPopupVisible && !token && <RegistrationPopup />}
+      {isPopupVisible && token && <ProfilePopup />}
     </header>
   );
 };
 
-export default React.memo(Header);
+export default Header;

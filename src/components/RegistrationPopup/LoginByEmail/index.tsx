@@ -1,12 +1,13 @@
 import React from "react";
 import { DrawerNavbar } from "../../Navbar/DrawerNavbar";
 import { VerificationCodeForm } from "../VerificationCodeForm";
-import InputMask from "react-input-mask";
 
 import styles from "./LoginByEmail.module.scss";
 import { ButtonM } from "../../Buttons/ButtonM";
 
 import axios from "axios";
+
+import { useDispatch } from "react-redux";
 
 type LoginByEmailProps = {
   handleNavbarBackClick: () => void;
@@ -51,7 +52,7 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
     setErrorMessage("");
 
     try {
-      const response = await axios.post("http://localhost:4000/register", {
+      const response = await axios.post("http://localhost:4000/auth/register", {
         email,
       });
 
@@ -65,7 +66,6 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
       }
     }
   };
-
   return (
     <>
       <DrawerNavbar

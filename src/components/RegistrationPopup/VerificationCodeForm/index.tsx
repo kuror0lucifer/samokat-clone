@@ -3,6 +3,8 @@ import styles from "./VerificationCodeForm.module.scss";
 
 import axios from "axios";
 import { ButtonM } from "../../Buttons/ButtonM";
+import { useDispatch } from "react-redux";
+import { setToken } from "@/redux/auth/slice";
 
 type VerificationCodeFormProps = {
   phone?: string;
@@ -25,6 +27,8 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
     input4: "",
   });
   const [message, setMessage] = React.useState<string>("");
+
+  const dispatch = useDispatch();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -53,10 +57,23 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
     const verificationCode = collectVerificationCode();
 
     try {
-      const response = await axios.post("http://localhost:4000/verify", {
+      const response = await axios.post("http://localhost:4000/auth/verify", {
         email,
         verificationCode,
       });
+
+      if (response.status === 200) {
+        const token = response.data.token;
+
+        localStorage.setItem("authToken", token);
+        dispatch(setToken(token));
+
+        if (email) {
+          localStorage.setItem("email", email);
+        }
+
+        window.location.reload();
+      }
 
       setMessage(response.data.message);
     } catch (error) {
@@ -105,7 +122,11 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
             />
           </div>
         </label>
-        <ButtonM type="submit">Подтвердить</ButtonM>
+        <div className={styles.buttons}>
+          <ButtonM type="submit" className={styles.button}>
+            Подтвердить
+          </ButtonM>
+        </div>
       </form>
       {message && <p>{message}</p>}
     </>

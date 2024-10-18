@@ -28,12 +28,9 @@ mongoose
   .catch((err) => console.log("Failed to connect to MongoDB", err));
 
 app.get("/getCategories", categories);
-
 app.get("/getProducts/:subcategoryId", product);
-
-app.post("/register", registerValidation, register);
-
-app.post("/verify", verify);
+app.post("/auth/register", registerValidation, register);
+app.post("/auth/verify", verify);
 
 const port = process.env.PORT;
 

@@ -9,8 +9,8 @@ declare module "*.png" {
 }
 
 declare module "*.scss" {
-  const content: any;
-  export default content;
+  const classNames: { [className: string]: string };
+  export default classNames;
 }
 
 declare module "react-input-mask" {
