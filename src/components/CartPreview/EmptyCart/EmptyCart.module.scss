@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  margin: 20px 0;
+  text-align: center;
+  white-space: pre-wrap;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: white;
+  margin: 12px 0 114px;
+
+  .icon {
+    position: relative;
+    height: 180px;
+  }
+}

@@ -27,7 +27,7 @@ type Category = {
 type ProductsResponse = Category[];
 
 type ProductCardProps = {
-  item: any;
+  item: ProductItem;
   setId: (id: string) => void;
 };
 
@@ -45,13 +45,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
     dispatch(showProductPopup(product.productId));
   };
 
+  const onClickAdd = (item: ProductItem) => {
+    localStorage.setItem("cart", JSON.stringify(item));
+  };
+
   return (
     <>
       <div className={styles.root}>
         <div className={styles.imgContainer}>
           <img
             src={item.productImg}
-            alt={item.productTitle}
+            alt={item.productName}
             onClick={() => {
               handleProductClick(item);
             }}
@@ -73,7 +77,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
               </Text>
             </div>
           </div>
-          <div className={styles.actions}>
+          <div className={styles.actions} onClick={() => onClickAdd(item)}>
             <ButtonS>
               <Text
                 className="p2SemiBold"

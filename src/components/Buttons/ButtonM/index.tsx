@@ -6,6 +6,8 @@ type ButtonMProps = {
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  style?: React.CSSProperties;
 };
 
 export const ButtonM: React.FC<ButtonMProps> = ({
@@ -13,12 +15,16 @@ export const ButtonM: React.FC<ButtonMProps> = ({
   className = "",
   onClick = () => {},
   type = "button",
+  disabled,
+  style,
 }) => {
   return (
     <button
       className={`${styles.button__control} ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
+      style={style}
     >
       {children}
     </button>

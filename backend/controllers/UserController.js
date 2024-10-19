@@ -48,7 +48,7 @@ export const register = async (req, res) => {
     const mailOptions = {
       from: process.env.MAIL,
       to: email,
-      subject: "Подтверджение регистрации",
+      subject: "Подтверждение регистрации",
       text: `Ваш код для подтверждения: ${code}`,
     };
 
@@ -78,6 +78,9 @@ export const verify = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
+
+    if (user) {
+    }
 
     if (!user) {
       return res.status(400).json({ message: "Пользователь не найден" });
