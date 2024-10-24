@@ -6,7 +6,7 @@ import styles from "./Home.module.scss";
 import { AsideRight } from "../AsideRight";
 
 type HomeProps = {
-  setId: (id: string) => void;
+  setId: (id: string | null) => void;
   id: string;
 };
 

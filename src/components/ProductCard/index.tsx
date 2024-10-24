@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { hidePopup, showProductPopup } from "../../redux/popup/slice";
 import { ProductPopup } from "../ProductPopup";
+import { selectCartItemById } from "@/redux/cart/selectors";
+import { addItem } from "@/redux/cart/slice";
+import { CartItem } from "@/redux/cart/types";
 
 export type ProductItem = {
   productName: string;
@@ -39,14 +42,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
   const isPopupVisible = useSelector(
     (state: RootState) => state.popup.visibleProductId === item.productId
   );
+  const cartItem = useSelector(selectCartItemById(item.productId));
+
+  const addedCount = cartItem ? cartItem.productCount : 0;
 
   const handleProductClick = (product: ProductItem) => {
     setSelectedProduct(item);
     dispatch(showProductPopup(product.productId));
   };
 
-  const onClickAdd = (item: ProductItem) => {
-    localStorage.setItem("cart", JSON.stringify(item));
+  const onClickAdd = () => {
+    const product: CartItem = {
+      productId: item.productId,
+      productName: item.productName,
+      productPrice: item.productPrice,
+      productImg: item.productImg,
+      productWeight: item.productWeight,
+      productCount: 0,
+    };
+    dispatch(addItem(product));
   };
 
   return (
@@ -77,7 +91,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
               </Text>
             </div>
           </div>
-          <div className={styles.actions} onClick={() => onClickAdd(item)}>
+          <div className={styles.actions} onClick={onClickAdd}>
             <ButtonS>
               <Text
                 className="p2SemiBold"

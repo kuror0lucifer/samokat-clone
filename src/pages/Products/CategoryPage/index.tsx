@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { NavbarBack } from "../../../components/Navbar/NavbarBack";
 import { Text } from "../../../components/Text";
 import { CategoryScreen } from "../CategoryScreen";
+import { ProductsResponse } from "@/@types/types";
 
 type CategoryPageProps = {
   id: string;
-  setId: (id: string) => void;
-  obtainedProducts: any;
+  setId: (id: string | null) => void;
+  obtainedProducts: ProductsResponse;
 };
 
 export const CategoryPage: React.FC<CategoryPageProps> = ({
@@ -28,8 +29,8 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
             <NavbarBack />
           </Link>
         </div>
-        {obtainedProducts && (
-          <Text className="h2Bold">{obtainedProducts[0]?.title}</Text>
+        {obtainedProducts?.length > 0 && (
+          <Text className="h2Bold">{obtainedProducts[0].category}</Text>
         )}
       </div>
       <CategoryScreen obtainedProducts={obtainedProducts} setId={setId} />

@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./CategoryScreen.module.scss";
 import { CategoryTagsList } from "./CategoryTagsList";
 import { CategorySection } from "./CategorySection";
+import { ProductsResponse } from "@/@types/types";
 
 type CategoryScreenProps = {
-  obtainedProducts: any;
+  obtainedProducts: ProductsResponse;
   setId: (id: string) => void;
 };
 

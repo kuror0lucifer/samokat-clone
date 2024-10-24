@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./CategorySection.module.scss";
 import { Text } from "../../../../components/Text";
 import { ProductsList } from "../ProductsList";
+import { ProductsResponse } from "@/@types/types";
 
 type CategorySectionProps = {
-  obtainedProducts: any;
+  obtainedProducts: ProductsResponse;
   setId: (id: string) => void;
 };
 

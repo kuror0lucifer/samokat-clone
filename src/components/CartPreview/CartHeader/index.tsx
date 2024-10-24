@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./CartHeader.module.scss";
 import { Text } from "@/components/Text";
 
-export const CartHeader = () => {
+export const CartHeader: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.address}>

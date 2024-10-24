@@ -12,6 +12,28 @@
   max-height: 900px;
   background-color: white;
   border-radius: 32px;
+
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    padding: 86px 16px 16px;
+    pointer-events: none;
+    background: linear-gradient(180deg, #fff0 7.81%, #fff 33.85%);
+    border-bottom-right-radius: 32px;
+    border-bottom-left-radius: 32px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 50px;
+      margin-bottom: 16px;
+      pointer-events: auto;
+    }
+  }
 }
 
 @media screen and (max-height: 750px) {

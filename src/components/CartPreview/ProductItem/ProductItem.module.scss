@@ -1,0 +1,50 @@
+.root {
+  position: relative;
+  display: flex;
+  padding: 12px 0 11px;
+  border-bottom: 1px solid #e0e0e0;
+
+  .imgContainer {
+    position: relative;
+    flex-shrink: 0;
+    width: 83px;
+    height: 83px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    border-radius: 12px;
+
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      inset: 0px;
+      color: transparent;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 8px;
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .price {
+        color: #404040;
+      }
+    }
+  }
+
+  .removeButton {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    color: #a6a6a6;
+    cursor: pointer;
+  }
+}

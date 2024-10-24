@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./CategoryTagsList.module.scss";
 import { ButtonS } from "../../../../components/Buttons/ButtonS";
+import { ProductsResponse } from "@/@types/types";
 
 type CategoryTagsListProps = {
-  obtainedProducts: any;
+  obtainedProducts: ProductsResponse;
 };
 
 export const CategoryTagsList: React.FC<CategoryTagsListProps> = ({

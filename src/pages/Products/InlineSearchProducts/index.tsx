@@ -3,29 +3,11 @@ import styles from "./InlineSearchProducts.module.scss";
 import WorkingHours from "../../../components/WorkingHours";
 import { CategoryPage } from "../CategoryPage";
 import axios from "axios";
-
-export type ProductItem = {
-  productName: string;
-  productPrice: number;
-  productWeight: string;
-  productImg: string;
-  productId: string;
-  productDescription: string;
-  productNutritions: string[][];
-  productAttributes: string[];
-};
-
-type Category = {
-  title: string;
-  category: string;
-  items: ProductItem[];
-};
-
-type ProductsResponse = Category[];
+import { ProductsResponse } from "@/@types/types";
 
 type InlineSearchProductsProps = {
   id: string;
-  setId: (id: string) => void;
+  setId: (id: string | null) => void;
 };
 
 export const InlineSearchProducts: React.FC<InlineSearchProductsProps> = ({
@@ -36,7 +18,7 @@ export const InlineSearchProducts: React.FC<InlineSearchProductsProps> = ({
   const offHours: number[] = [23, 0, 1, 2, 3, 4, 5, 6, 7];
 
   const [obtainedProducts, setObtainedProducts] =
-    React.useState<ProductsResponse | null>(null);
+    React.useState<ProductsResponse>([]);
 
   React.useEffect(() => {
     if (id) {

@@ -3,25 +3,8 @@ import styles from "./Products.module.scss";
 import { InlineSearchProducts } from "./InlineSearchProducts";
 import Footer from "../../components/Footer";
 
-export type ProductItem = {
-  productName: string;
-  productPrice: number;
-  productWeight: string;
-  productImg: string;
-  productId: string;
-  productDescription: string;
-  productNutritions: string[][];
-  productAttributes: string[];
-};
-
-type Category = {
-  title: string;
-  category: string;
-  items: ProductItem[];
-};
-
 type productsProps = {
-  setId: (id: string) => void;
+  setId: (id: string | null) => void;
   id: string;
 };
 

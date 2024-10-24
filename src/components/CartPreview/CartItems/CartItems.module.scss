@@ -1,0 +1,11 @@
+.root {
+  padding-bottom: 170px;
+  margin: 0 -4px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  .cartItem {
+  }
+}
