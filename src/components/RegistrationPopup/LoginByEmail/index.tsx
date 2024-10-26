@@ -50,9 +50,12 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
     setErrorMessage("");
 
     try {
-      const response = await axios.post("http://localhost:4000/auth/register", {
-        email,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/auth/authentication",
+        {
+          email,
+        }
+      );
 
       setMessage(response.data.message);
       setIsClick(true);

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./CartItemAction.module.scss";
 import { Text } from "@/components/Text";
-import { CartItem } from "@/redux/cart/types";
 
 type CartItemActionProps = {
   count: number;
