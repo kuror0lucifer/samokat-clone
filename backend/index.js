@@ -3,10 +3,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import registerValidation from "./validation/auth.js";
-import { register, verify } from "./controllers/UserController.js";
+import { auth, verify } from "./controllers/UserController.js";
 import { product } from "./controllers/ProductController.js";
 import { categories } from "./controllers/CategoriesController.js";
+import authValidation from "./validation/auth.js";
 
 dotenv.config();
 const app = express();
@@ -29,7 +29,7 @@ mongoose
 
 app.get("/getCategories", categories);
 app.get("/getProducts/:subcategoryId", product);
-app.post("/auth/register", registerValidation, register);
+app.post("/auth/authentication", authValidation, auth);
 app.post("/auth/verify", verify);
 
 const port = process.env.PORT;

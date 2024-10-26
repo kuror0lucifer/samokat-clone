@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const register = async (req, res) => {
+export const auth = async (req, res) => {
   try {
     const { email } = req.body;
     const errors = validationResult(req);
@@ -30,9 +30,34 @@ export const register = async (req, res) => {
 
     let user = await User.findOne({ email });
     if (user) {
-      return res
-        .status(400)
-        .json({ message: "Пользователь с такой почтой уже существует" });
+      const code = crypto.randomBytes(2).toString("hex");
+      const codeLifeTime = Date.now() + 3600000;
+
+      user.isVerified = false;
+      user.verificationCode = code;
+      user.codeExpires = codeLifeTime;
+      await user.save();
+
+      const mailOptions = {
+        from: process.env.MAIL,
+        to: email,
+        subject: "Подтверждение регистрации",
+        text: `Ваш код для подтверждения: ${code}`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error("Error while sending email:", error);
+          return res
+            .status(500)
+            .json({ message: "Ошибка при отправке почты." });
+        }
+        res.status(200).json({
+          message: "Пользователь найден. Проверьте почту для подтверждения.",
+        });
+      });
+
+      return;
     }
 
     const code = crypto.randomBytes(2).toString("hex");
@@ -78,9 +103,6 @@ export const verify = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-
-    if (user) {
-    }
 
     if (!user) {
       return res.status(400).json({ message: "Пользователь не найден" });
