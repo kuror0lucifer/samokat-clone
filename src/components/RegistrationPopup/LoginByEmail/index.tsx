@@ -51,7 +51,7 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/authentication",
+        "http://localhost:4000/api/users/auth/authentication",
         {
           email,
         }

@@ -40,7 +40,7 @@ const Main: React.FC<MainProps> = ({ id, setId }) => {
     const fetchMainCategories = async () => {
       try {
         await axios
-          .get("http://localhost:4000/getCategories")
+          .get("http://localhost:4000/api/categories/getCategories")
           .then((res) => setMainCategories(res.data));
       } catch (err) {
         console.error("Ошибка загрузки категорий товаров: ", err);

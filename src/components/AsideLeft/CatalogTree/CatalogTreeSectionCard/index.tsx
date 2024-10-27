@@ -16,13 +16,15 @@ type CategoriesItem = {
 
 export const CatalogTreeSectionCard = () => {
   const [categories, setCategories] = React.useState<CategoriesItem[]>([]);
-  const [showSubcategories, setShowSubcategories] = React.useState({});
+  const [showSubcategories, setShowSubcategories] = React.useState<
+    Record<string, boolean>
+  >({});
 
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
         await axios
-          .get("http://localhost:4000/getCategories")
+          .get("http://localhost:4000/api/categories/getCategories")
           .then((res) => setCategories(res.data))
           .catch((err) => console.error(err));
       } catch (err) {

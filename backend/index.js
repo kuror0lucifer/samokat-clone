@@ -3,10 +3,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
-import { auth, verify } from "./controllers/UserController.js";
-import { product } from "./controllers/ProductController.js";
-import { categories } from "./controllers/CategoriesController.js";
-import authValidation from "./validation/auth.js";
+import userRoutes from "./routes/userRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import categoriesRoutes from "./routes/categoriesRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -27,10 +26,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Failed to connect to MongoDB", err));
 
-app.get("/getCategories", categories);
-app.get("/getProducts/:subcategoryId", product);
-app.post("/auth/authentication", authValidation, auth);
-app.post("/auth/verify", verify);
+app.use("/api/categories", categoriesRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 const port = process.env.PORT;
 

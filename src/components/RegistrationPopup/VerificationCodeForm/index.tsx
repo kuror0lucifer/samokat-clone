@@ -57,10 +57,13 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
     const verificationCode = collectVerificationCode();
 
     try {
-      const response = await axios.post("http://localhost:4000/auth/verify", {
-        email,
-        verificationCode,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/users/auth/verify",
+        {
+          email,
+          verificationCode,
+        }
+      );
 
       if (response.status === 200) {
         const token = response.data.token;
@@ -77,7 +80,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 
       setMessage(response.data.message);
     } catch (error) {
-      setMessage("Ошибка при подтверждении");
+      setMessage(`Ошибка при подтверждении, ${error}`);
     }
   };
 
