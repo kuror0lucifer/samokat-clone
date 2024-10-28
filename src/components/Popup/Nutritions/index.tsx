@@ -12,8 +12,8 @@ export const Nutritions: React.FC<NutritionsProps> = ({ productInfo }) => {
     <div className={styles.nutritions}>
       <span className={styles.text}>В 100 граммах</span>
       <div className={styles.list}>
-        {productInfo.productNutritions?.map((nutritions: string[]) => (
-          <div className={styles.nutrition}>
+        {productInfo.productNutritions?.map((nutritions: string[], index) => (
+          <div className={styles.nutrition} key={index}>
             <span className={styles.text}>{nutritions[0]}</span>
             <span className={styles.text}>{nutritions[1]}</span>
           </div>

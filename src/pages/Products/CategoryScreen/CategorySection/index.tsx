@@ -16,14 +16,14 @@ export const CategorySection: React.FC<CategorySectionProps> = ({
   return (
     <>
       {obtainedProducts?.map((category, index) => (
-        <>
-          <div className={styles.root} key={index}>
+        <React.Fragment key={index}>
+          <div className={styles.root}>
             <div className={styles.header}>
               <Text className="h2Bold">{category.category}</Text>
             </div>
             <ProductsList category={category} setId={setId} />
           </div>
-        </>
+        </React.Fragment>
       ))}
     </>
   );

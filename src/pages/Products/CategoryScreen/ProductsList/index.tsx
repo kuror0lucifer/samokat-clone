@@ -15,7 +15,7 @@ export const ProductsList: React.FC<ProductsListProps> = ({
   return (
     <div className={styles.productList}>
       {category.items.map((item, index) => (
-        <a href="##">
+        <a href="##" key={index}>
           <ProductCard item={item} setId={setId} />
         </a>
       ))}

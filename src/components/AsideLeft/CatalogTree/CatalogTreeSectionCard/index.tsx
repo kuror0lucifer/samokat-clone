@@ -77,7 +77,7 @@ export const CatalogTreeSectionCard = () => {
           {showSubcategories[category._id] && (
             <div className={styles.categories} key={category._id}>
               {category.subcategories.map((subcategory, index) => (
-                <CategoryLink className={styles.category}>
+                <CategoryLink className={styles.category} key={index}>
                   {subcategory.title}
                 </CategoryLink>
               ))}
