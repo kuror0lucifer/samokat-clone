@@ -19,6 +19,7 @@ export type ProductItem = {
   productDescription: string;
   productNutritions: string[][];
   productAttributes: string[];
+  productCount: number;
 };
 
 type Category = {
@@ -51,14 +52,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
     dispatch(showProductPopup(product.productId));
   };
 
-  const onClickAdd = () => {
-    const product: CartItem = {
+  const onClickAdd = (product: CartItem) => {
+    product = {
       productId: item.productId,
       productName: item.productName,
       productPrice: item.productPrice,
       productImg: item.productImg,
       productWeight: item.productWeight,
-      productCount: 0,
+      productAttributes: item.productAttributes || [],
+      productDescription: item.productDescription || "",
+      productNutritions: item.productNutritions || [],
+      productCount: 1,
     };
     dispatch(addItem(product));
   };
@@ -91,7 +95,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ item, setId }) => {
               </Text>
             </div>
           </div>
-          <div className={styles.actions} onClick={onClickAdd}>
+          <div className={styles.actions} onClick={() => onClickAdd(item)}>
             <ButtonS>
               <Text
                 className="p2SemiBold"

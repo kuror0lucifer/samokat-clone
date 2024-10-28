@@ -7,6 +7,7 @@ export type ProductItem = {
   productDescription: string;
   productNutritions: string[][];
   productAttributes: string[];
+  productCount: number;
 };
 
 export type Category = {

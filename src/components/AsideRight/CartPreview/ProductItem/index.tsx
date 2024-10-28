@@ -6,9 +6,22 @@ import { selectCart } from "@/redux/cart/selectors";
 import { addItem, minusItem, removeItem } from "@/redux/cart/slice";
 import { CartItemAction } from "./CartItemActions";
 import { CartItem } from "@/redux/cart/types";
+import { hidePopup, showProductPopup } from "@/redux/popup/slice";
+import { ProductItem as ProductType } from "@/@types/types";
+import { ProductPopup } from "@/components/ProductPopup";
+import { RootState } from "@/redux/store";
 
 export const ProductItem: React.FC = () => {
+  const [selectedProduct, setSelectedProduct] =
+    React.useState<ProductType | null>(null);
+
+  const isPopupVisible = useSelector(
+    (state: RootState) =>
+      state.popup.visibleProductId === selectedProduct?.productId
+  );
+
   const { items, totalPrice } = useSelector(selectCart);
+
   const dispatch = useDispatch();
 
   const onClickRemove = (productId: string) => {
@@ -20,7 +33,23 @@ export const ProductItem: React.FC = () => {
   };
 
   const onClickPlus = (item: CartItem) => {
-    dispatch(addItem(item));
+    const productData: ProductType = {
+      productName: item.productName,
+      productPrice: item.productPrice,
+      productWeight: item.productWeight,
+      productImg: item.productImg,
+      productId: item.productId,
+      productDescription: item.productDescription || "",
+      productNutritions: item.productNutritions || [],
+      productAttributes: item.productAttributes || [],
+      productCount: item.productCount,
+    };
+    dispatch(addItem(productData));
+  };
+
+  const handleProductClick = (product: ProductType) => {
+    setSelectedProduct(product);
+    dispatch(showProductPopup(product.productId));
   };
 
   return (
@@ -28,7 +57,12 @@ export const ProductItem: React.FC = () => {
       {items.map((item) => (
         <div className={styles.root} key={item.productId}>
           <div className={styles.imgContainer}>
-            <img src={item.productImg} alt={item.productName} loading="lazy" />
+            <img
+              src={item.productImg}
+              alt={item.productName}
+              loading="lazy"
+              onClick={() => handleProductClick(item)}
+            />
           </div>
           <div className={styles.content}>
             <div>
@@ -85,6 +119,14 @@ export const ProductItem: React.FC = () => {
           </div>
         </div>
       ))}
+
+      {selectedProduct && (
+        <ProductPopup
+          productInfo={selectedProduct}
+          isProductPopupVisible={isPopupVisible}
+          setIsPopupVisible={() => dispatch(hidePopup())}
+        />
+      )}
     </>
   );
 };
