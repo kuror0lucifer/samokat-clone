@@ -48,17 +48,14 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
     }
 
     setErrorMessage("");
+    setIsClick(true);
 
     try {
       const response = await axios.post(
         "http://localhost:4000/api/users/auth/authentication",
-        {
-          email,
-        }
+        { email }
       );
-
       setMessage(response.data.message);
-      setIsClick(true);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         setMessage(error.response.data.message || "Ошибка при регистрации");
@@ -67,6 +64,7 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
       }
     }
   };
+
   return (
     <>
       <DrawerNavbar
@@ -93,7 +91,11 @@ export const LoginByEmail: React.FC<LoginByEmailProps> = ({
                 <p className={styles.errorMessage}>{errorMessage}</p>
               )}
               <div className={styles.button}>
-                <ButtonM className={styles.buttonM} onClick={handleClickButton}>
+                <ButtonM
+                  className={styles.buttonM}
+                  onSubmit={handleClickButton}
+                  type="submit"
+                >
                   <span>Получить код</span>
                 </ButtonM>
               </div>
