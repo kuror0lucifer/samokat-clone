@@ -5,8 +5,13 @@ import { Drawer } from "../Popup/Drawer";
 import { Overlay } from "../Popup/Overlay";
 import DrawerHeader from "../Popup/DrawerHeader";
 import { ProfileDetails } from "./ProfileDetails";
+import { ProfileSettings } from "./ProfileSettings";
+import { DrawerNavbar } from "../Navbar/DrawerNavbar";
+import { NameSettings } from "./ProfileSettings/NameSettings";
 
 export const ProfilePopup: React.FC = () => {
+  const [showSettings, setShowSettings] = React.useState<boolean>(false);
+
   const portalRoot = document.getElementById("portal-root");
 
   if (!portalRoot) {
@@ -14,12 +19,27 @@ export const ProfilePopup: React.FC = () => {
     return null;
   }
 
+  const handleSettingsClick = () => {
+    setShowSettings(true);
+  };
+
+  const handleNavbarBackClick = () => {
+    setShowSettings(false);
+  };
+
   return ReactDOM.createPortal(
     <>
       <Drawer>
         <Overlay className={styles.drawerContainer}>
           <DrawerHeader />
-          <ProfileDetails />
+          {showSettings ? (
+            <>
+              <DrawerNavbar handleNavbarBackClick={handleNavbarBackClick} />
+              <ProfileSettings />
+            </>
+          ) : (
+            <ProfileDetails onSettingsClick={handleSettingsClick} />
+          )}
         </Overlay>
       </Drawer>
     </>,

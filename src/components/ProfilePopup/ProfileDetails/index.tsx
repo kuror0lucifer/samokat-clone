@@ -3,7 +3,13 @@ import styles from "./ProfileDetails.module.scss";
 import { Text } from "@/components/Text";
 import { ButtonM } from "@/components/Buttons/ButtonM";
 
-export const ProfileDetails: React.FC = () => {
+interface ProfileDetailsProps {
+  onSettingsClick: () => void;
+}
+
+export const ProfileDetails: React.FC<ProfileDetailsProps> = ({
+  onSettingsClick,
+}) => {
   const email = localStorage.getItem("email")?.toUpperCase();
 
   const handleClick = () => {
@@ -291,7 +297,7 @@ export const ProfileDetails: React.FC = () => {
           </svg>
           <Text className="h4SemiBold">Адреса</Text>
         </a>
-        <a className={styles.innerLink} href="##">
+        <a className={styles.innerLink} href="##" onClick={onSettingsClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="64"

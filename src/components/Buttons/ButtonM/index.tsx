@@ -5,6 +5,7 @@ type ButtonMProps = {
   children: React.ReactNode;
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onSubmit?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   style?: React.CSSProperties;
@@ -17,6 +18,7 @@ export const ButtonM: React.FC<ButtonMProps> = ({
   type = "button",
   disabled,
   style,
+  onSubmit,
 }) => {
   return (
     <button
@@ -25,6 +27,7 @@ export const ButtonM: React.FC<ButtonMProps> = ({
       type={type}
       disabled={disabled}
       style={style}
+      onSubmit={onSubmit}
     >
       {children}
     </button>

@@ -1,0 +1,18 @@
+.root {
+  height: 100%;
+
+  .container {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 8px 24px 0;
+
+    .title {
+      padding: 6px 0 18px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+  }
+}
