@@ -56,7 +56,7 @@ export const UserSettingsSection: React.FC<UserSettingsSectionProps> = ({
         </div>
         <div className={styles.label}>
           <Text className="p1SemiBold" style={{ color: "#404040" }}>
-            {user ? user.name.toUpperCase() : "Ваше имя".toUpperCase()}
+            {user?.name?.toUpperCase() || "ВАШЕ ИМЯ"}
           </Text>
         </div>
       </div>
